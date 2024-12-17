@@ -115,8 +115,15 @@ function generateField() {
             if (!cell) { return; }
             const row = cell.parentElement;
             console.log(cell.innerHTML, row.rowIndex, cell.cellIndex);
-            console.log(rowList[row.rowIndex])
-
+            var possibleSquares = document.getElementsByClassName("possible");
+            console.log(possibleSquares.length)
+            if (possibleSquares.length != 0) {
+                for (let i = 0; i <= possibleSquares.length; i++) {
+                    console.log(i)
+                    console.log(possibleSquares[0])
+                    possibleSquares[0].classList.remove("possible");
+                }
+            }
 
             if (rowList[row.rowIndex - 1] != null) {
                 cellList = rowList[row.rowIndex - 1].cells;
