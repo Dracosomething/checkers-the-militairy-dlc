@@ -1,0 +1,23 @@
+table,
+td {
+    /* border: 1px solid black; */
+    border-collapse: collapse;
+}
+
+td {
+    width: 70px;
+    height: 70px;
+}
+
+.black {
+    background-color: black;
+}
+
+.white {
+    background-color: bisque;
+}
+
+.White-Piece, .Black-Piece {
+    margin: auto;
+    display: block;
+}
