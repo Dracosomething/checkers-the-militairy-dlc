@@ -127,25 +127,25 @@ function generateField() {
 
             if (rowList[row.rowIndex - 1] != null) {
                 cellList = rowList[row.rowIndex - 1].cells;
-                if (cellList[cell.cellIndex].classList.contains("black")) {
+                if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("black")) {
                     console.log("black nono up")
-                } else if (cellList[cell.cellIndex].classList.contains("white")) {
+                } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
                     console.log("yip up")
                     if (!cellList[cell.cellIndex].classList.contains("occupied")) {
                         cellList[cell.cellIndex].classList.add("possible")
                     }
                 }
-                if (cellList[cell.cellIndex + 1].classList.contains("black")) {
+                if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
                     console.log("black nono up")
-                } else if (cellList[cell.cellIndex + 1].classList.contains("white")) {
+                } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white")) {
                     console.log("yip up")
                     if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex + 1].classList.add("possible")
                     }
                 }
-                if (cellList[cell.cellIndex - 1].classList.contains("black")) {
+                if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
                     console.log("black nono up")
-                } else if (cellList[cell.cellIndex - 1].classList.contains("white")) {
+                } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white")) {
                     console.log("yip up")
                     if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex - 1].classList.add("possible")
@@ -154,17 +154,17 @@ function generateField() {
             }
             if (rowList[row.rowIndex] != null) {
                 cellList = rowList[row.rowIndex].cells;
-                if (cellList[cell.cellIndex - 1].classList.contains("black")) {
+                if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
                     console.log("black nono")
-                } else if (cellList[cell.cellIndex - 1].classList.contains("white")) {
+                } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white")) {
                     console.log("yip here")
                     if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex - 1].classList.add("possible")
                     }
                 }
-                if (cellList[cell.cellIndex + 1].classList.contains("black")) {
+                if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
                     console.log("black nono")
-                } else if (cellList[cell.cellIndex + 1].classList.contains("white")) {
+                } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white")) {
                     console.log("yip here")
                     if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex + 1].classList.add("possible")
