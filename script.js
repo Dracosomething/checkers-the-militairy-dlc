@@ -27,7 +27,9 @@ function generateField() {
                 for (let i = 0; i <= possibleSquares.length; i++) {
                     console.log(i)
                     console.log(possibleSquares[0])
+                    possibleSquares[0].removeEventListener("click", move);
                     possibleSquares[0].classList.remove("possible");
+                    // possibleSquares[0].removeEventListener("click", possibleSquares, true);
                 }
             }
 
@@ -58,6 +60,7 @@ function generateField() {
                     console.log("yip here")
                     if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex - 1].classList.add("possible")
+                        cellList[cell.cellIndex - 1].addEventListener("click", move)
                     }
                 }
                 if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
@@ -66,6 +69,7 @@ function generateField() {
                     console.log("yip here")
                     if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex + 1].classList.add("possible")
+                        cellList[cell.cellIndex + 1].addEventListener("click", move)
                     }
                 }
             }
@@ -77,6 +81,7 @@ function generateField() {
                     console.log("yip low")
                     if (!cellList[cell.cellIndex].classList.contains("occupied")) {
                         cellList[cell.cellIndex].classList.add("possible")
+                        cellList[cell.cellIndex].addEventListener("click", move)
                     }
                 }
                 if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
@@ -85,6 +90,7 @@ function generateField() {
                     console.log("yip low")
                     if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex + 1].classList.add("possible")
+                        cellList[cell.cellIndex + 1].addEventListener("click", move)
                     }
                 }
                 if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
@@ -93,6 +99,7 @@ function generateField() {
                     console.log("yip low")
                     if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex - 1].classList.add("possible")
+                        cellList[cell.cellIndex - 1].addEventListener("click", move)
                     }
                 }
             }
@@ -121,7 +128,9 @@ function generateField() {
                 for (let i = 0; i <= possibleSquares.length; i++) {
                     console.log(i)
                     console.log(possibleSquares[0])
+                    possibleSquares[0].removeEventListener("click", move);
                     possibleSquares[0].classList.remove("possible");
+                    // possibleSquares[0].removeEventListener("click", possibleSquares, true);
                 }
             }
 
@@ -133,6 +142,7 @@ function generateField() {
                     console.log("yip up")
                     if (!cellList[cell.cellIndex].classList.contains("occupied")) {
                         cellList[cell.cellIndex].classList.add("possible")
+                        cellList[cell.cellIndex].addEventListener("click", move)
                     }
                 }
                 if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
@@ -141,6 +151,7 @@ function generateField() {
                     console.log("yip up")
                     if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex + 1].classList.add("possible")
+                        cellList[cell.cellIndex + 1].addEventListener("click", move)
                     }
                 }
                 if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
@@ -149,6 +160,7 @@ function generateField() {
                     console.log("yip up")
                     if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex - 1].classList.add("possible")
+                        cellList[cell.cellIndex - 1].addEventListener("click", move)
                     }
                 }
             }
@@ -160,6 +172,7 @@ function generateField() {
                     console.log("yip here")
                     if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex - 1].classList.add("possible")
+                        cellList[cell.cellIndex - 1].addEventListener("click", move)
                     }
                 }
                 if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
@@ -168,6 +181,7 @@ function generateField() {
                     console.log("yip here")
                     if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
                         cellList[cell.cellIndex + 1].classList.add("possible")
+                        cellList[cell.cellIndex + 1].addEventListener("click", move)
                     }
                 }
             }
@@ -199,4 +213,8 @@ function generateField() {
         blackPiece.classList.add("occupied")
     }
     generateButton.setAttribute('disabled', 'false');
+}
+
+function move(event){
+    console.log("code            " + event)
 }
