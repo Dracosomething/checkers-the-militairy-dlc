@@ -32,8 +32,9 @@ function generateField() {
 
             var possibleSquares = document.getElementsByClassName("possible");
             console.log(possibleSquares.length)
+            let x = possibleSquares.length;
             if (possibleSquares.length != 0) {
-                for (let i = 0; i <= possibleSquares.length; i++) {
+                for (let i = 0; i < x; i++) {
                     console.log(i)
                     console.log(possibleSquares[0])
                     possibleSquares[0].removeEventListener("click", move);
@@ -54,14 +55,22 @@ function generateField() {
                     console.log("black nono up")
                 } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")){
                     console.log("yip up")
+                    cellList = rowList[row.rowIndex - 2].cells;
+                    if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                        console.log("yippppppp")
+                        cellList[cell.cellIndex + 2].classList.add("possible")
+                        cellList[cell.cellIndex + 2].addEventListener("click", attack)
+                    }
                 }
+                console.log("erwerwerwer")
+                cellList = rowList[row.rowIndex - 1].cells;
                 if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
                     console.log("black nono up")
                 } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")){
                     console.log("yip up")
                     cellList = rowList[row.rowIndex - 2].cells;
                     if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
-                        console.log("yippppppp")
+                        console.log("yippppppp2")
                         cellList[cell.cellIndex - 2].classList.add("possible")
                         cellList[cell.cellIndex - 2].addEventListener("click", attack)
                     }
@@ -250,8 +259,9 @@ function move(event){
     event.target.classList.add("occupied")
     var possibleSquares = document.getElementsByClassName("possible");
     console.log(possibleSquares.length)
+    let x = possibleSquares.length;
     if (possibleSquares.length != 0) {
-        for (let i = 0; i <= possibleSquares.length; i++) {
+        for (let i = 0; i < x; i++) {
             console.log(i)
             console.log(possibleSquares[0])
             possibleSquares[0].removeEventListener("click", move);
