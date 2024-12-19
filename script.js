@@ -30,6 +30,14 @@ function generateField() {
                 }
             }
 
+            var targets = document.getElementsByClassName("target");
+            if (targets.length != 0) {
+                for (let i = 0; i <= targets.length; i++) {
+                    targets[0].classList.remove("target");
+                    // possibleSquares[0].removeEventListener("click", possibleSquares, true);
+                }
+            }
+
             var possibleSquares = document.getElementsByClassName("possible");
             console.log(possibleSquares.length)
             let x = possibleSquares.length;
@@ -48,17 +56,18 @@ function generateField() {
                 cellList = rowList[row.rowIndex - 1].cells;
                 if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("black")) {
                     console.log("black nono up")
-                } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white") && cellList[cell.cellIndex].classList.contains("occupied") && !cellList[cell.cellIndex].children[0].classList.contains("White-Piece")){
+                } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white") && cellList[cell.cellIndex].classList.contains("occupied") && !cellList[cell.cellIndex].children[0].classList.contains("White-Piece")) {
                     console.log("yip up")
                 }
                 if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
                     console.log("black nono up")
-                } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")){
+                } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
                     console.log("yip up")
                     cellList = rowList[row.rowIndex - 2].cells;
                     if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
                         console.log("yippppppp")
                         cellList[cell.cellIndex + 2].classList.add("possible")
+                        cellList = rowList[row.rowIndex - 1].cells;
                         cellList[cell.cellIndex + 2].addEventListener("click", attack)
                     }
                 }
@@ -66,7 +75,7 @@ function generateField() {
                 cellList = rowList[row.rowIndex - 1].cells;
                 if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
                     console.log("black nono up")
-                } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")){
+                } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
                     console.log("yip up")
                     cellList = rowList[row.rowIndex - 2].cells;
                     if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
@@ -223,17 +232,17 @@ function generateField() {
                 cellList = rowList[row.rowIndex + 1].cells;
                 if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("black")) {
                     console.log("black nono low")
-                } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white") && !cellList[cell.cellIndex + 1].classList.contains("occupied")){
+                } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white") && !cellList[cell.cellIndex + 1].classList.contains("occupied")) {
                     console.log("yip low")
                 }
                 if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
                     console.log("black nono low")
-                } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && !cellList[cell.cellIndex].classList.contains("occupied")){
+                } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && !cellList[cell.cellIndex].classList.contains("occupied")) {
                     console.log("yip low")
                 }
                 if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
                     console.log("black nono low")
-                } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied")){
+                } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied")) {
                     console.log("yip low")
                 }
             }
@@ -252,7 +261,7 @@ function generateField() {
     generateButton.setAttribute('disabled', 'false');
 }
 
-function move(event){
+function move(event) {
     console.log("code            " + event + "                   " + document.getElementsByClassName("selected")[0].parentElement)
     document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
     event.target.appendChild(document.getElementsByClassName("selected")[0])
@@ -271,6 +280,29 @@ function move(event){
     }
 }
 
-function attack(event){
-    console.log("attack")
+function attack(event) {
+    console.log("code            " + event + "           " + event.target.cellIndex + "        " + document.getElementsByClassName("selected")[0].parentElement)
+    console.log(event.target.parentElement.rowIndex)
+    let row = rowList[event.target.parentElement.rowIndex + 1]
+    let cel = row.querySelectorAll("td")[event.target.cellIndex + 1].children[0]
+    console.log(cel)
+    console.log(row)
+    cel.classList.add("target")
+    document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
+    event.target.appendChild(document.getElementsByClassName("selected")[0])
+    document.getElementsByClassName('target')[0].parentElement.classList.remove('occupied')
+    document.getElementsByClassName('target')[0].remove();
+    event.target.classList.add("occupied")
+    var possibleSquares = document.getElementsByClassName("possible");
+    console.log(possibleSquares.length)
+    let x = possibleSquares.length;
+    if (possibleSquares.length != 0) {
+        for (let i = 0; i < x; i++) {
+            console.log(i)
+            console.log(possibleSquares[0])
+            possibleSquares[0].removeEventListener("click", move);
+            possibleSquares[0].classList.remove("possible");
+            // possibleSquares[0].removeEventListener("click", possibleSquares, true);
+        }
+    }
 }
