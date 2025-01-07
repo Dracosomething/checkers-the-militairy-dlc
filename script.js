@@ -7,6 +7,7 @@ let generateButton = document.getElementById("generateButton")
 
 const rowList = document.querySelectorAll("table tr")
 var cellList;
+var target;
 
 function generateField() {
     // let white = document.createElement('img');
@@ -73,6 +74,35 @@ function setUpBlack(event) {
         }
         if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
             console.log("black nono up")
+        }else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
+            console.log("yip up")
+            // cellList[cell.cellIndex + 1].classList.add("target")
+            // console.log(document.getElementsByClassName("target"))
+            cellList = rowList[row.rowIndex + 2].cells;
+            if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                console.log("yippppppp")
+                cellList[cell.cellIndex + 2].classList.add("possible")
+                cellList[cell.cellIndex + 2].addEventListener("click", function(){
+                    switch(document.getElementsByClassName("target").length){
+                        case 2:
+                            getTarget(0)
+                            break;
+                        case 3:
+                            getTarget(0)
+                            break;
+                        case 4:
+                            getTarget(0);
+                            break;
+                        case 1:
+                            getTarget(0);
+                            break;
+                    }
+                })
+                cellList[cell.cellIndex + 2].addEventListener("click", attack)
+                cellList = rowList[row.rowIndex - 1].cells
+                cellList[cell.cellIndex + 1].classList.add("target")
+                console.log(document.getElementsByClassName("target"))
+            }
         } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white")) {
             console.log("yip up")
             if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
@@ -82,6 +112,35 @@ function setUpBlack(event) {
         }
         if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
             console.log("black nono up")
+        } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
+            console.log("yip up")
+            // cellList[cell.cellIndex + 1].classList.add("target")
+            // console.log(document.getElementsByClassName("target"))
+            cellList = rowList[row.rowIndex - 2].cells;
+            if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                console.log("yippppppp")
+                cellList[cell.cellIndex - 2].classList.add("possible")
+                cellList[cell.cellIndex - 2].addEventListener("click", function(){
+                    switch(document.getElementsByClassName("target").length){
+                        case 2:
+                            getTarget(1)
+                            break;
+                        case 3:
+                            getTarget(1)
+                            break;
+                        case 4:
+                            getTarget(1);
+                            break;
+                        case 1:
+                            getTarget(0);
+                            break;
+                    }
+                })
+                cellList[cell.cellIndex - 2].addEventListener("click", attack)
+                cellList = rowList[row.rowIndex - 1].cells
+                cellList[cell.cellIndex - 1].classList.add("target")
+                console.log(document.getElementsByClassName("target"))
+            }
         } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white")) {
             console.log("yip up")
             if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
@@ -112,21 +171,78 @@ function setUpBlack(event) {
     //     }
     // }
     if (rowList[row.rowIndex - 1] != null) {
-        cellList = rowList[row.rowIndex + 1].cells;
+        console.log("tedsfwef")
+        cellList = rowList[row.rowIndex - 1].cells;
         if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("black")) {
-            console.log("black nono low")
-        } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white") && !cellList[cell.cellIndex + 1].classList.contains("occupied")) {
-            console.log("yip low")
+            console.log("black nono up")
+        } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white") && cellList[cell.cellIndex].classList.contains("occupied") && !cellList[cell.cellIndex].children[0].classList.contains("White-Piece")) {
+            console.log("yip up")
         }
         if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            console.log("black nono low")
-        } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && !cellList[cell.cellIndex].classList.contains("occupied")) {
-            console.log("yip low")
+            console.log("black nono up")
+        } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
+            console.log("yip up")
+            // cellList[cell.cellIndex + 1].classList.add("target")
+            // console.log(document.getElementsByClassName("target"))
+            cellList = rowList[row.rowIndex + 2].cells;
+            if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                console.log("yippppppp")
+                cellList[cell.cellIndex + 2].classList.add("possible")
+                cellList[cell.cellIndex + 2].addEventListener("click", function () {
+                    switch (document.getElementsByClassName("target").length) {
+                        case 2:
+                            getTarget(1)
+                            break;
+                        case 3:
+                            getTarget(2)
+                            break;
+                        case 4:
+                            getTarget(2);
+                            break;
+                        case 1:
+                            getTarget(0);
+                            break;
+                    }
+                })
+                cellList[cell.cellIndex + 2].addEventListener("click", attack)
+                cellList = rowList[row.rowIndex - 1].cells
+                cellList[cell.cellIndex + 1].classList.add("target")
+                console.log(document.getElementsByClassName("target"))
+            }
         }
+        console.log("erwerwerwer")
+        cellList = rowList[row.rowIndex - 1].cells;
         if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            console.log("black nono low")
-        } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied")) {
-            console.log("yip low")
+            console.log("black nono up")
+        } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("Black-Piece")) {
+            console.log("yip up")
+            // cellList[cell.cellIndex - 1].classList.add("target")
+            // console.log(document.getElementsByClassName("target"))
+            cellList = rowList[row.rowIndex - 2].cells;
+            if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                console.log("yippppppp2")
+                cellList[cell.cellIndex - 2].classList.add("possible")
+                cellList[cell.cellIndex - 2].addEventListener("click", function () {
+                    switch (document.getElementsByClassName("target").length) {
+                        case 2:
+                            getTarget(1)
+                            break;
+                        case 3:
+                            getTarget(2)
+                            break;
+                        case 4:
+                            getTarget(3);
+                            break;
+                        case 1:
+                            getTarget(0);
+                            break;
+                    }
+                })
+                cellList[cell.cellIndex - 2].addEventListener("click", attack)
+                cellList = rowList[row.rowIndex - 1].cells;
+                cellList[cell.cellIndex - 1].classList.add("target")
+                console.log(document.getElementsByClassName("target"))
+            }
         }
     }
 
@@ -173,6 +289,19 @@ function setUpWhite(event) {
         }
     }
 
+    var targetSquares = document.getElementsByClassName("target");
+    console.log(targetSquares.length)
+    let y = targetSquares.length;
+    if (targetSquares.length != 0) {
+        for (let i = 0; i < y; i++) {
+            console.log(i)
+            console.log(targetSquares[0])
+            targetSquares[0].removeEventListener("click", move);
+            targetSquares[0].classList.remove("possible");
+            // possibleSquares[0].removeEventListener("click", possibleSquares, true);
+        }
+    }
+
     if (rowList[row.rowIndex - 1] != null) {
         console.log("tedsfwef")
         cellList = rowList[row.rowIndex - 1].cells;
@@ -184,13 +313,40 @@ function setUpWhite(event) {
         if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
             console.log("black nono up")
         } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
-            console.log("yip up")
+            console.log("1")
             // cellList[cell.cellIndex + 1].classList.add("target")
             // console.log(document.getElementsByClassName("target"))
             cellList = rowList[row.rowIndex - 2].cells;
             if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
                 console.log("yippppppp")
                 cellList[cell.cellIndex + 2].classList.add("possible")
+                cellList[cell.cellIndex + 2].addEventListener("click", function () {
+                    // if(document.getElementsByClassName("target").length > 1){
+                    //     getTarget(1)
+                    //     console.log(document.getElementsByClassName("target").length)
+                    // } else {
+                    //     getTarget(0)
+                    // }
+                    console.log("hello")
+                    switch (document.getElementsByClassName("target").length) {
+                        case 2:
+                            console.log("e")
+                            getTarget(1)
+                            break;
+                        case 3:
+                            console.log("x")
+                            getTarget(1)
+                            break;
+                        case 4:
+                            console.log("b")
+                            getTarget(1);
+                            break;
+                        case 1:
+                            console.log("t")
+                            getTarget(0);
+                            break;
+                    }
+                })
                 cellList[cell.cellIndex + 2].addEventListener("click", attack)
                 cellList = rowList[row.rowIndex - 1].cells
                 cellList[cell.cellIndex + 1].classList.add("target")
@@ -202,13 +358,34 @@ function setUpWhite(event) {
         if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
             console.log("black nono up")
         } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
-            console.log("yip up")
+            console.log("2")
             // cellList[cell.cellIndex - 1].classList.add("target")
             // console.log(document.getElementsByClassName("target"))
             cellList = rowList[row.rowIndex - 2].cells;
             if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
                 console.log("yippppppp2")
                 cellList[cell.cellIndex - 2].classList.add("possible")
+                cellList[cell.cellIndex - 2].addEventListener("click", function () {
+                    // if(document.getElementsByClassName("target").length < 1){
+                    //     getTarget(1)
+                    // } else {
+                    //     getTarget(0)
+                    // }
+                    switch (document.getElementsByClassName("target").length) {
+                        case 2:
+                            getTarget(0)
+                            break;
+                        case 3:
+                            getTarget(0)
+                            break;
+                        case 4:
+                            getTarget(0);
+                            break;
+                        case 1:
+                            getTarget(0);
+                            break;
+                    }
+                })
                 cellList[cell.cellIndex - 2].addEventListener("click", attack)
                 cellList = rowList[row.rowIndex - 1].cells;
                 cellList[cell.cellIndex - 1].classList.add("target")
@@ -250,6 +427,40 @@ function setUpWhite(event) {
         }
         if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
             console.log("black nono low")
+        } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
+            console.log("yip up")
+            // cellList[cell.cellIndex - 1].classList.add("target")
+            // console.log(document.getElementsByClassName("target"))
+            cellList = rowList[row.rowIndex + 2].cells;
+            if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                console.log("3")
+                cellList[cell.cellIndex + 2].classList.add("possible")
+                cellList[cell.cellIndex + 2].addEventListener("click", function () {
+                    // if(document.getElementsByClassName("target").length < 1){
+                    //     getTarget(1)
+                    // } else {
+                    //     getTarget(0)
+                    // }
+                    switch (document.getElementsByClassName("target").length) {
+                        case 2:
+                            getTarget(1)
+                            break;
+                        case 3:
+                            getTarget(2)
+                            break;
+                        case 4:
+                            getTarget(3);
+                            break;
+                        case 1:
+                            getTarget(0);
+                            break;
+                    }
+                })
+                cellList[cell.cellIndex + 2].addEventListener("click", attack)
+                cellList = rowList[row.rowIndex + 1].cells;
+                cellList[cell.cellIndex + 1].classList.add("target")
+                console.log(document.getElementsByClassName("target"))
+            }
         } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white")) {
             console.log("yip low")
             if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
@@ -259,6 +470,40 @@ function setUpWhite(event) {
         }
         if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
             console.log("black nono low")
+        } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
+            console.log("4")
+            // cellList[cell.cellIndex - 1].classList.add("target")
+            // console.log(document.getElementsByClassName("target"))
+            cellList = rowList[row.rowIndex + 2].cells;
+            if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                console.log("yippppppp2")
+                cellList[cell.cellIndex - 2].classList.add("possible")
+                cellList[cell.cellIndex - 2].addEventListener("click", function () {
+                    // if(document.getElementsByClassName("target").length < 1){
+                    //     getTarget(1)
+                    // } else {
+                    //     getTarget(0)
+                    // }
+                    switch (document.getElementsByClassName("target").length) {
+                        case 2:
+                            getTarget(1)
+                            break;
+                        case 3:
+                            getTarget(2)
+                            break;
+                        case 4:
+                            getTarget(2);
+                            break;
+                        case 1:
+                            getTarget(0);
+                            break;
+                    }
+                })
+                cellList[cell.cellIndex - 2].addEventListener("click", attack)
+                cellList = rowList[row.rowIndex + 1].cells;
+                cellList[cell.cellIndex - 1].classList.add("target")
+                console.log(document.getElementsByClassName("target"))
+            }
         } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white")) {
             console.log("yip low")
             if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
@@ -272,10 +517,11 @@ function setUpWhite(event) {
     // console.log(cellList[cell.cellIndex])
     // console.log(cellListUp[cell.cellIndex])
     // console.log(cellListLow[cell.cellIndex])
+    console.log("length:" + document.getElementsByClassName("target").length)
 }
 
 function move(event) {
-    console.log("code            " + event + "                   " + document.getElementsByClassName("selected")[0].parentElement)
+    // console.log("code            " + event + "                   " + document.getElementsByClassName("selected")[0].parentElement)
     document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
     event.target.appendChild(document.getElementsByClassName("selected")[0])
     event.target.classList.add("occupied")
@@ -293,16 +539,23 @@ function move(event) {
     }
 }
 
+function getTarget(index) {
+    console.log("index: " + index + "-------------- target: " + target)
+    target = index;
+    return target;
+}
+
 function attack(event) {
+    console.log(target)
     console.log("code            " + event + "                   " + document.getElementsByClassName("selected")[0].parentElement)
     document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
     event.target.appendChild(document.getElementsByClassName("selected")[0])
     event.target.classList.add("occupied")
     var possibleSquares = document.getElementsByClassName("possible");
     console.log(possibleSquares.length)
-    console.log(document.getElementsByClassName("target")[0].children[0])
-    document.getElementsByClassName("target")[0].children[0].parentElement.classList.remove("occupied")
-    document.getElementsByClassName("target")[0].children[0].remove()
+    console.log(document.getElementsByClassName("target")[target])
+    document.getElementsByClassName("target")[target].children[0].parentElement.classList.remove("occupied")
+    document.getElementsByClassName("target")[target].children[0].remove()
     let x = possibleSquares.length;
     if (possibleSquares.length != 0) {
         for (let i = 0; i < x; i++) {
