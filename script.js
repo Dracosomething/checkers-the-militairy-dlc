@@ -73,7 +73,7 @@ function setUpBlack(event) {
         if (rowList[row.rowIndex + 1] != null) {
             cellList = rowList[row.rowIndex + 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("Black-Piece")) {
+            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("Black-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
                     cellList[cell.cellIndex - 2].classList.add("possible")
@@ -100,7 +100,7 @@ function setUpBlack(event) {
             }
             cellList = rowList[row.rowIndex + 1].cells;
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("Black-Piece")) {
+            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("Black-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
                     cellList[cell.cellIndex + 2].classList.add("possible")
@@ -129,7 +129,7 @@ function setUpBlack(event) {
         if (rowList[row.rowIndex - 1] != null) {
             cellList = rowList[row.rowIndex - 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("Black-Piece")) {
+            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("Black-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
                     cellList[cell.cellIndex - 2].classList.add("possible")
@@ -161,7 +161,7 @@ function setUpBlack(event) {
             }
             cellList = rowList[row.rowIndex - 1].cells;
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("Black-Piece")) {
+            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("Black-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
                     cellList[cell.cellIndex + 2].classList.add("possible")
@@ -237,7 +237,7 @@ function setUpWhite(event) {
         if (rowList[row.rowIndex - 1] != null) {
             cellList = rowList[row.rowIndex - 1].cells;
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
+            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
                     cellList[cell.cellIndex + 2].classList.add("possible")
@@ -264,7 +264,7 @@ function setUpWhite(event) {
             }
             cellList = rowList[row.rowIndex - 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
+            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
                     cellList[cell.cellIndex - 2].classList.add("possible")
@@ -300,7 +300,7 @@ function setUpWhite(event) {
                 }
             }
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
+            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
                     cellList[cell.cellIndex + 2].classList.add("possible")
@@ -332,7 +332,7 @@ function setUpWhite(event) {
             }
             cellList = rowList[row.rowIndex + 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
+            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
                     cellList[cell.cellIndex - 2].classList.add("possible")
