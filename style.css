@@ -22,7 +22,7 @@ td {
     display: block;
 }
 
-.possible {
+.possible, .possible-attack {
     background-color: aquamarine;
 }
 

@@ -193,6 +193,124 @@ function setUpBlack(event) {
             }
         }
         event.target.classList.add("selected")
+        for(var b = 0; b < document.getElementsByClassName("possible").length; b++){
+            var stone = document.getElementsByClassName("possible")[b]
+            const cell = stone.closest('td');
+            if (!cell) { return; }
+            const row = cell.parentElement;
+            if (rowList[row.rowIndex + 1] != null) {
+                cellList = rowList[row.rowIndex + 1].cells;
+                if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
+                } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("Black-Piece")) {
+                    cellList = rowList[row.rowIndex + 2].cells;
+                    if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                        cellList[cell.cellIndex - 2].classList.add("possible")
+                        cellList[cell.cellIndex - 2].addEventListener("click", function () {
+                            switch (document.getElementsByClassName("target").length) {
+                                case 2:
+                                    getTarget(1)
+                                    break;
+                                case 3:
+                                    getTarget(1)
+                                    break;
+                                case 4:
+                                    getTarget(1);
+                                    break;
+                                case 1:
+                                    getTarget(0);
+                                    break;
+                            }
+                        })
+                        cellList[cell.cellIndex - 2].addEventListener("click", piece.attack)
+                        cellList = rowList[row.rowIndex + 1].cells
+                        cellList[cell.cellIndex - 1].classList.add("target")
+                    }
+                }
+                cellList = rowList[row.rowIndex + 1].cells;
+                if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
+                } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("Black-Piece")) {
+                    cellList = rowList[row.rowIndex + 2].cells;
+                    if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                        cellList[cell.cellIndex + 2].classList.add("possible")
+                        cellList[cell.cellIndex + 2].addEventListener("click", function () {
+                            switch (document.getElementsByClassName("target").length) {
+                                case 2:
+                                    getTarget(0)
+                                    break;
+                                case 3:
+                                    getTarget(0)
+                                    break;
+                                case 4:
+                                    getTarget(0);
+                                    break;
+                                case 1:
+                                    getTarget(0);
+                                    break;
+                            }
+                        })
+                        cellList[cell.cellIndex + 2].addEventListener("click", piece.attack)
+                        cellList = rowList[row.rowIndex + 1].cells;
+                        cellList[cell.cellIndex + 1].classList.add("target")
+                    }
+                }
+            }
+            if (rowList[row.rowIndex - 1] != null) {
+                cellList = rowList[row.rowIndex - 1].cells;
+                if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
+                } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("Black-Piece")) {
+                    cellList = rowList[row.rowIndex - 2].cells;
+                    if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                        cellList[cell.cellIndex - 2].classList.add("possible")
+                        cellList[cell.cellIndex - 2].addEventListener("click", function () {
+                            switch (document.getElementsByClassName("target").length) {
+                                case 2:
+                                    getTarget(1)
+                                    break;
+                                case 3:
+                                    getTarget(2)
+                                    break;
+                                case 4:
+                                    getTarget(3);
+                                    break;
+                                case 1:
+                                    getTarget(0);
+                                    break;
+                            }
+                        })
+                        cellList[cell.cellIndex - 2].addEventListener("click", piece.attack)
+                        cellList = rowList[row.rowIndex - 1].cells;
+                        cellList[cell.cellIndex - 1].classList.add("target")
+                    }
+                }
+                cellList = rowList[row.rowIndex - 1].cells;
+                if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
+                } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("Black-Piece")) {
+                    cellList = rowList[row.rowIndex - 2].cells;
+                    if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                        cellList[cell.cellIndex + 2].classList.add("possible")
+                        cellList[cell.cellIndex + 2].addEventListener("click", function () {
+                            switch (document.getElementsByClassName("target").length) {
+                                case 2:
+                                    getTarget(1)
+                                    break;
+                                case 3:
+                                    getTarget(2)
+                                    break;
+                                case 4:
+                                    getTarget(2);
+                                    break;
+                                case 1:
+                                    getTarget(0);
+                                    break;
+                            }
+                        })
+                        cellList[cell.cellIndex + 2].addEventListener("click", piece.attack)
+                        cellList = rowList[row.rowIndex - 1].cells;
+                        cellList[cell.cellIndex + 1].classList.add("target")
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -364,6 +482,124 @@ function setUpWhite(event) {
             }
         }
         event.target.classList.add("selected")
+        for(var b = 0; b < document.getElementsByClassName('possible').length; b++){
+            var stone = document.getElementsByClassName("possible")[b]
+            const cell = stone.closest('td');
+            if (!cell) { return; }
+            const row = cell.parentElement;
+            if (rowList[row.rowIndex - 1] != null) {
+                cellList = rowList[row.rowIndex - 1].cells;
+                if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
+                } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
+                    cellList = rowList[row.rowIndex - 2].cells;
+                    if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                        cellList[cell.cellIndex + 2].classList.add("possible")
+                        cellList[cell.cellIndex + 2].addEventListener("click", function () {
+                            switch (document.getElementsByClassName("target").length) {
+                                case 2:
+                                    getTarget(1)
+                                    break;
+                                case 3:
+                                    getTarget(1)
+                                    break;
+                                case 4:
+                                    getTarget(1);
+                                    break;
+                                case 1:
+                                    getTarget(0);
+                                    break;
+                            }
+                        })
+                        cellList[cell.cellIndex + 2].addEventListener("click", piece.attack)
+                        cellList = rowList[row.rowIndex - 1].cells
+                        cellList[cell.cellIndex + 1].classList.add("target")
+                    }
+                }
+                cellList = rowList[row.rowIndex - 1].cells;
+                if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
+                } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
+                    cellList = rowList[row.rowIndex - 2].cells;
+                    if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                        cellList[cell.cellIndex - 2].classList.add("possible")
+                        cellList[cell.cellIndex - 2].addEventListener("click", function () {
+                            switch (document.getElementsByClassName("target").length) {
+                                case 2:
+                                    getTarget(0)
+                                    break;
+                                case 3:
+                                    getTarget(0)
+                                    break;
+                                case 4:
+                                    getTarget(0);
+                                    break;
+                                case 1:
+                                    getTarget(0);
+                                    break;
+                            }
+                        })
+                        cellList[cell.cellIndex - 2].addEventListener("click", piece.attack)
+                        cellList = rowList[row.rowIndex - 1].cells;
+                        cellList[cell.cellIndex - 1].classList.add("target")
+                    }
+                }
+            }
+            if (rowList[row.rowIndex + 1] != null) {
+                cellList = rowList[row.rowIndex + 1].cells;
+                if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
+                } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains("White-Piece")) {
+                    cellList = rowList[row.rowIndex + 2].cells;
+                    if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                        cellList[cell.cellIndex + 2].classList.add("possible")
+                        cellList[cell.cellIndex + 2].addEventListener("click", function () {
+                            switch (document.getElementsByClassName("target").length) {
+                                case 2:
+                                    getTarget(1)
+                                    break;
+                                case 3:
+                                    getTarget(2)
+                                    break;
+                                case 4:
+                                    getTarget(2);
+                                    break;
+                                case 1:
+                                    getTarget(0);
+                                    break;
+                            }
+                        })
+                        cellList[cell.cellIndex + 2].addEventListener("click", piece.attack)
+                        cellList = rowList[row.rowIndex + 1].cells;
+                        cellList[cell.cellIndex + 1].classList.add("target")
+                    }
+                }
+                cellList = rowList[row.rowIndex + 1].cells;
+                if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
+                } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains("White-Piece")) {
+                    cellList = rowList[row.rowIndex + 2].cells;
+                    if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                        cellList[cell.cellIndex - 2].classList.add("possible")
+                        cellList[cell.cellIndex - 2].addEventListener("click", function () {
+                            switch (document.getElementsByClassName("target").length) {
+                                case 2:
+                                    getTarget(1)
+                                    break;
+                                case 3:
+                                    getTarget(2)
+                                    break;
+                                case 4:
+                                    getTarget(3);
+                                    break;
+                                case 1:
+                                    getTarget(0);
+                                    break;
+                            }
+                        })
+                        cellList[cell.cellIndex - 2].addEventListener("click", piece.attack)
+                        cellList = rowList[row.rowIndex + 1].cells;
+                        cellList[cell.cellIndex - 1].classList.add("target")
+                    }
+                }
+            }
+        }
     }
 }
 
