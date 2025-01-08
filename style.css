@@ -14,7 +14,7 @@ td {
 }
 
 .white {
-    background-color: bisque;
+    background-color: rgb(254, 233, 208);
 }
 
 .White-Piece, .Black-Piece {
@@ -24,4 +24,16 @@ td {
 
 .possible {
     background-color: aquamarine;
+}
+
+#turn-show {
+    border: 1px;
+    border-radius: 25px;
+    border-color: darkgray;
+    border-style: solid;
+    margin-top: 50px;
+    background-color: darkgray;
+    font-family: Arial;
+    color: black;
+    text-align: center;
 }
