@@ -5,6 +5,8 @@ var WhitePieces = document.getElementsByClassName("White-Piece")
 class stone {
     constructor() { }
 
+    possible;
+
     target;
 
     get _turn() {
@@ -12,19 +14,21 @@ class stone {
     }
     set _turn(side) {
         turn = side
-        switch (piece._turn){
+        switch (piece._turn) {
             case "black":
-                for (let j = 0; j < BlackPieces.length; j++){
+                for (let j = 0; j < BlackPieces.length; j++) {
+                    console.log("blackturn")
                     let stone = BlackPieces[j]
-                    piece.forceAttack(stone, "Black")
+                    piece.forceAttack(stone, "White")
                 }
                 break
             case "white":
-                for (let j = 0; j < WhitePieces.length; j++){
+                for (let j = 0; j < WhitePieces.length; j++) {
+                    console.log("whiteturn")
                     let stone = WhitePieces[j]
-                    piece.forceAttack(stone, "White")
+                    piece.forceAttack(stone, "Black")
                 }
-                break 
+                break
         }
     }
 
@@ -46,11 +50,12 @@ class stone {
     }
 
     attack(event) {
-        console.log(document.getElementsByClassName("selected")[0])
+        console.log(document.getElementsByClassName("selected"))
         document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
         event.target.appendChild(document.getElementsByClassName("selected")[0])
         event.target.classList.add("occupied")
         var possibleSquares = document.getElementsByClassName("possible");
+        console.log(document.getElementsByClassName("target"))
         document.getElementsByClassName("target")[target].children[0].parentElement.classList.remove("occupied")
         document.getElementsByClassName("target")[target].children[0].remove()
         let x = possibleSquares.length;
@@ -69,10 +74,15 @@ class stone {
         if (!cell) { return; }
         const row = cell.parentElement;
 
+        // console.log(stone)
+
         var selected = document.getElementsByClassName("selected");
         if (selected.length != 0) {
             for (let i = 0; i <= selected.length; i++) {
-                selected[0].classList.remove("selected");
+                if (selected[0].classList.contains(opposing + "-Piece")) {
+                    console.log(selected[0])
+                    selected[0].classList.remove("selected");
+                }
             }
         }
 
@@ -87,7 +97,10 @@ class stone {
         var targets = document.getElementsByClassName("target");
         if (targets.length != 0) {
             for (let i = 0; i <= targets.length; i++) {
-                targets[0].classList.remove("target");
+                if (!targets[0].classList.contains(opposing + "-Piece")) {
+                    console.log(targets[0])
+                    targets[0].classList.remove("target");
+                }
             }
         }
 
@@ -102,9 +115,12 @@ class stone {
         if (rowList[row.rowIndex + 1] != null) {
             cellList = rowList[row.rowIndex + 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
+                // console.log("sddfsfew")
+            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
+                // console.log("text")
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                    // console.log(" erwetwt")
                     cellList[cell.cellIndex - 2].classList.add("possible")
                     cellList[cell.cellIndex - 2].addEventListener("click", function () {
                         switch (document.getElementsByClassName("target").length) {
@@ -125,13 +141,17 @@ class stone {
                     cellList[cell.cellIndex - 2].addEventListener("click", piece.attack)
                     cellList = rowList[row.rowIndex + 1].cells
                     cellList[cell.cellIndex - 1].classList.add("target")
+                    stone.classList.add("selected")
+                    piece.possible = true
                 }
             }
             cellList = rowList[row.rowIndex + 1].cells;
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
+            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
+                // console.log("text")
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                    // console.log(" erwetwt")
                     cellList[cell.cellIndex + 2].classList.add("possible")
                     cellList[cell.cellIndex + 2].addEventListener("click", function () {
                         switch (document.getElementsByClassName("target").length) {
@@ -152,15 +172,19 @@ class stone {
                     cellList[cell.cellIndex + 2].addEventListener("click", piece.attack)
                     cellList = rowList[row.rowIndex + 1].cells;
                     cellList[cell.cellIndex + 1].classList.add("target")
+                    stone.classList.add("selected")
+                    piece.possible = true
                 }
             }
         }
         if (rowList[row.rowIndex - 1] != null) {
             cellList = rowList[row.rowIndex - 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && !cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
+            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
+                // console.log("text")
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
+                    // console.log(" erwetwt")
                     cellList[cell.cellIndex - 2].classList.add("possible")
                     cellList[cell.cellIndex - 2].addEventListener("click", function () {
                         switch (document.getElementsByClassName("target").length) {
@@ -181,13 +205,17 @@ class stone {
                     cellList[cell.cellIndex - 2].addEventListener("click", piece.attack)
                     cellList = rowList[row.rowIndex - 1].cells;
                     cellList[cell.cellIndex - 1].classList.add("target")
+                    stone.classList.add("selected")
+                    piece.possible = true
                 }
             }
             cellList = rowList[row.rowIndex - 1].cells;
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && !cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
+            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
+                // console.log("text")
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
+                    // console.log(" erwetwt")
                     cellList[cell.cellIndex + 2].classList.add("possible")
                     cellList[cell.cellIndex + 2].addEventListener("click", function () {
                         switch (document.getElementsByClassName("target").length) {
@@ -208,8 +236,11 @@ class stone {
                     cellList[cell.cellIndex + 2].addEventListener("click", piece.attack)
                     cellList = rowList[row.rowIndex - 1].cells;
                     cellList[cell.cellIndex + 1].classList.add("target")
+                    stone.classList.add("selected")
+                    piece.possible = true
                 }
             }
+            // console.log(stone.classList)
         }
     }
 }
