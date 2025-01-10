@@ -192,6 +192,6 @@ function getTarget(index) {
     return target;
 }
 
-function alertWin(){
-    
+function alertWin(color){
+    alert(color + " won")
 }

@@ -50,7 +50,7 @@ class stone {
         switch (piece._turn) {
             case "black":
                 if(blackPieces.length == 0){
-                    win = true
+                    alertWin("white")
                 }
                 for (let j = 0; j < BlackPieces.length; j++) {
                     let stone = BlackPieces[j]
@@ -58,6 +58,9 @@ class stone {
                 }
                 break
             case "white":
+                if(WhitePieces.length == 0){
+                    alertWin("black")
+                }
                 for (let j = 0; j < WhitePieces.length; j++) {
                     let stone = WhitePieces[j]
                     piece.forceAttack(stone, "Black")
