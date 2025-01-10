@@ -182,11 +182,20 @@
                 </tr>
             </table>
         </div>
-        <div>
+        <div class="sidebar">
             <button onclick="generateField()" id="generateButton">Generate</button>
             <div id="turn-show">
-                <p></p>
+                <p id="margin-bottom"></p>
             </div>
+            <hr>
+            <div class="score">
+                <p>white</p>
+                <div id="score-white"></div>
+                <p>black</p>
+                <div id="score-black"></div>
+            </div>
+            <hr>
+            <div id="player-score"></div>
         </div>
     </div>
     <script src="js/stone.js"></script>

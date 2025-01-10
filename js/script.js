@@ -6,9 +6,15 @@ var WhiteSquares = document.getElementsByClassName("white")
 let player = document.getElementById("turn-show")
 let generateButton = document.getElementById("generateButton")
 
+let score_white = document.getElementById("score-white")
+let score_black = document.getElementById("score-black")
+
 const rowList = document.querySelectorAll("table tr")
+
 var cellList;
 var target;
+var win;
+
 const piece = new stone();
 var oldturn = piece._turn
 
@@ -184,4 +190,8 @@ function setUpWhite(event) {
 function getTarget(index) {
     target = index;
     return target;
+}
+
+function alertWin(){
+    
 }

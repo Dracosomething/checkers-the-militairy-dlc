@@ -45,11 +45,13 @@ class stone {
             for (let i = 0; i <= targets.length; i++) {
                 console.log(targets[0])
                 targets[0].classList.remove("target");
-
             }
         }
         switch (piece._turn) {
             case "black":
+                if(blackPieces.length == 0){
+                    win = true
+                }
                 for (let j = 0; j < BlackPieces.length; j++) {
                     let stone = BlackPieces[j]
                     piece.forceAttack(stone, "White")
@@ -96,6 +98,20 @@ class stone {
                 possibleSquares[0].removeEventListener("click", piece.attack);
                 possibleSquares[0].classList.remove("possible");
             }
+        }
+        switch (piece._turn){
+            case "black":
+                let white = document.createElement('img');
+                white.src = 'assets/stone-white.png';
+                white.className = "score_counter"
+                score_black.appendChild(white)
+                break
+            case "white":
+                let black = document.createElement('img');
+                black.src = 'assets/stone-black.png';
+                black.className = "score_counter"
+                score_white.appendChild(black)
+                break
         }
         piece._turn = turn == "black" ? "white" : "black"
         player.children[0].innerHTML = piece._turn
@@ -226,22 +242,43 @@ class stone {
                 }
             }
         }
-        let numb = Math.floor(Math.random() * document.getElementsByClassName("selected").length)
         if (document.getElementsByClassName("selected").length > 1) {
-            for (let i = 0; i < document.getElementsByClassName("selected").length; i++) {
-                document.getElementsByClassName("selected")[0].classList.remove("selected")
-            }
-            for (let x = 0; x < document.getElementsByClassName("possible").length; x++) {
-                if (x != numb) {
-                    document.getElementsByClassName("possible")[x].classList.remove("possible")
+            if (rowList[row.rowIndex + 2] != null && rowList[row.rowIndex - 2] != null) {
+                if (!rowList[row.rowIndex + 2].cells[cell.cellIndex].classList.contains("possible") && !rowList[row.rowIndex - 2].cells[cell.cellIndex].classList.contains("possible")) {
+                    if (!document.getElementsByClassName("selected").length < 1) {
+                        let selected = document.getElementsByClassName("selected")
+                        for (let i = 0; i < document.getElementsByClassName("selected").length; i++) {
+                            document.getElementsByClassName("selected")[0].classList.remove("selected")
+                        }
+                        for (let x = 0; x < document.getElementsByClassName("possible").length; x++) {
+                            document.getElementsByClassName("possible")[x].removeEventListener("click", piece.attack)
+                            if (x != 0) {
+                                document.getElementsByClassName("possible")[x].classList.remove("possible")
+                            }
+                        }
+                        document.getElementsByClassName("possible")[0].addEventListener("click", piece.attack)
+                        selected[0].classList.add("selected")
+                        piece.possible = true
+                    }
+                    piece.possible = true
                 }
-                document.getElementsByClassName("possible")[0].removeEventListener("click", piece.attack)
+            } else {
+                let numb = Math.floor(Math.random() * document.getElementsByClassName("selected").length)
+                if (document.getElementsByClassName("selected").length > 1) {
+                    for (let i = 0; i < document.getElementsByClassName("selected").length; i++) {
+                        document.getElementsByClassName("selected")[0].classList.remove("selected")
+                    }
+                    for (let x = 0; x < document.getElementsByClassName("possible").length; x++) {
+                        document.getElementsByClassName("possible")[0].removeEventListener("click", piece.attack)
+                        if (x != numb) {
+                            document.getElementsByClassName("possible")[x].classList.remove("possible")
+                        }
+                    }
+                }
+                document.getElementsByClassName("possible")[0].addEventListener("click", piece.attack)
+                document.getElementsByClassName("selected")[numb].classList.add("selected")
             }
-            document.getElementsByClassName("possible")[0].addEventListener("click", piece.attack)
-            document.getElementsByClassName("selected")[numb].classList.add("selected")
+            piece.possible = true
         }
-        console.log(numb)
-        console.log(document.getElementsByClassName("selected"))
-        console.log(document.getElementsByClassName("possible"))
     }
 }

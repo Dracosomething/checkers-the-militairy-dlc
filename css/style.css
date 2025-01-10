@@ -1,3 +1,7 @@
+body {
+    font-family: Arial;
+}
+
 table,
 td {
     /* border: 1px solid black; */
@@ -36,8 +40,40 @@ td {
     border-color: darkgray;
     border-style: solid;
     margin-top: 50px;
+    margin-bottom: 50px;
     background-color: darkgray;
     font-family: Arial;
     color: black;
     text-align: center;
+    width: 75px;
+}
+
+#margin-bottom {
+    margin-bottom: 16px;
+}
+
+p {
+    margin-bottom: 0px;
+}
+
+.score_counter {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    scale: 50%;
+    object-fit: contain;
+    height: auto;
+    width: 40px;
+}
+
+.score-black {
+    align-items: start;
+}
+
+.score-white {
+    align-items: start;
+}
+
+.sidebar{
+    width: 500px;
 }
