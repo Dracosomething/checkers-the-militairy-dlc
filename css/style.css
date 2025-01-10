@@ -26,6 +26,10 @@ td {
     background-color: aquamarine;
 }
 
+.not-possible {
+    background-color: red;
+}
+
 #turn-show {
     border: 1px;
     border-radius: 25px;

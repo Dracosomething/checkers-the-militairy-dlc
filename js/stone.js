@@ -14,21 +14,56 @@ class stone {
     }
     set _turn(side) {
         turn = side
+        var selected = document.getElementsByClassName("selected");
+        if (selected.length != 0) {
+            for (let i = 0; i <= selected.length; i++) {
+                console.log(selected[0])
+                selected[0].classList.remove("selected");
+            }
+        }
+
+        var possibleSquares = document.getElementsByClassName("possible");
+        if (possibleSquares.length != 0) {
+            for (let i = 0; i <= possibleSquares.length; i++) {
+                possibleSquares[0].removeEventListener("click", piece.move);
+                possibleSquares[0].classList.remove("possible");
+            }
+        }
+
+        var targetSquares = document.getElementsByClassName("target");
+        let y = targetSquares.length;
+        if (targetSquares.length != 0) {
+            for (let i = 0; i < y; i++) {
+                console.log(targetSquares[0])
+                targetSquares[0].removeEventListener("click", piece.move);
+                targetSquares[0].classList.remove("possible");
+            }
+        }
+
+        var targets = document.getElementsByClassName("target");
+        if (targets.length != 0) {
+            for (let i = 0; i <= targets.length; i++) {
+                console.log(targets[0])
+                targets[0].classList.remove("target");
+
+            }
+        }
         switch (piece._turn) {
             case "black":
                 for (let j = 0; j < BlackPieces.length; j++) {
-                    console.log("blackturn")
                     let stone = BlackPieces[j]
                     piece.forceAttack(stone, "White")
                 }
                 break
             case "white":
                 for (let j = 0; j < WhitePieces.length; j++) {
-                    console.log("whiteturn")
                     let stone = WhitePieces[j]
                     piece.forceAttack(stone, "Black")
                 }
                 break
+        }
+        if (piece.possible) {
+            piece.possible = !piece.possible
         }
     }
 
@@ -44,18 +79,15 @@ class stone {
                 possibleSquares[0].classList.remove("possible");
             }
         }
-        console.log(piece._turn)
         piece._turn = piece._turn == "black" ? "white" : "black"
         player.children[0].innerHTML = piece._turn
     }
 
     attack(event) {
-        console.log(document.getElementsByClassName("selected"))
         document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
         event.target.appendChild(document.getElementsByClassName("selected")[0])
         event.target.classList.add("occupied")
         var possibleSquares = document.getElementsByClassName("possible");
-        console.log(document.getElementsByClassName("target"))
         document.getElementsByClassName("target")[target].children[0].parentElement.classList.remove("occupied")
         document.getElementsByClassName("target")[target].children[0].remove()
         let x = possibleSquares.length;
@@ -74,53 +106,12 @@ class stone {
         if (!cell) { return; }
         const row = cell.parentElement;
 
-        // console.log(stone)
-
-        var selected = document.getElementsByClassName("selected");
-        if (selected.length != 0) {
-            for (let i = 0; i <= selected.length; i++) {
-                if (selected[0].classList.contains(opposing + "-Piece")) {
-                    console.log(selected[0])
-                    selected[0].classList.remove("selected");
-                }
-            }
-        }
-
-        var possibleSquares = document.getElementsByClassName("possible");
-        if (possibleSquares.length != 0) {
-            for (let i = 0; i <= possibleSquares.length; i++) {
-                possibleSquares[0].removeEventListener("click", piece.move);
-                possibleSquares[0].classList.remove("possible");
-            }
-        }
-
-        var targets = document.getElementsByClassName("target");
-        if (targets.length != 0) {
-            for (let i = 0; i <= targets.length; i++) {
-                if (!targets[0].classList.contains(opposing + "-Piece")) {
-                    console.log(targets[0])
-                    targets[0].classList.remove("target");
-                }
-            }
-        }
-
-        var targetSquares = document.getElementsByClassName("target");
-        let y = targetSquares.length;
-        if (targetSquares.length != 0) {
-            for (let i = 0; i < y; i++) {
-                targetSquares[0].removeEventListener("click", piece.move);
-                targetSquares[0].classList.remove("possible");
-            }
-        }
         if (rowList[row.rowIndex + 1] != null) {
             cellList = rowList[row.rowIndex + 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-                // console.log("sddfsfew")
             } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
-                // console.log("text")
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
-                    // console.log(" erwetwt")
                     cellList[cell.cellIndex - 2].classList.add("possible")
                     cellList[cell.cellIndex - 2].addEventListener("click", function () {
                         switch (document.getElementsByClassName("target").length) {
@@ -149,9 +140,7 @@ class stone {
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
             } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
-                // console.log("text")
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
-                    // console.log(" erwetwt")
                     cellList[cell.cellIndex + 2].classList.add("possible")
                     cellList[cell.cellIndex + 2].addEventListener("click", function () {
                         switch (document.getElementsByClassName("target").length) {
@@ -182,9 +171,7 @@ class stone {
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
             } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
-                // console.log("text")
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
-                    // console.log(" erwetwt")
                     cellList[cell.cellIndex - 2].classList.add("possible")
                     cellList[cell.cellIndex - 2].addEventListener("click", function () {
                         switch (document.getElementsByClassName("target").length) {
@@ -213,9 +200,7 @@ class stone {
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
             } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
-                // console.log("text")
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
-                    // console.log(" erwetwt")
                     cellList[cell.cellIndex + 2].classList.add("possible")
                     cellList[cell.cellIndex + 2].addEventListener("click", function () {
                         switch (document.getElementsByClassName("target").length) {
@@ -240,7 +225,23 @@ class stone {
                     piece.possible = true
                 }
             }
-            // console.log(stone.classList)
         }
+        let numb = Math.floor(Math.random() * document.getElementsByClassName("selected").length)
+        if (document.getElementsByClassName("selected").length > 1) {
+            for (let i = 0; i < document.getElementsByClassName("selected").length; i++) {
+                document.getElementsByClassName("selected")[0].classList.remove("selected")
+            }
+            for (let x = 0; x < document.getElementsByClassName("possible").length; x++) {
+                if (x != numb) {
+                    document.getElementsByClassName("possible")[x].classList.remove("possible")
+                }
+                document.getElementsByClassName("possible")[0].removeEventListener("click", piece.attack)
+            }
+            document.getElementsByClassName("possible")[0].addEventListener("click", piece.attack)
+            document.getElementsByClassName("selected")[numb].classList.add("selected")
+        }
+        console.log(numb)
+        console.log(document.getElementsByClassName("selected"))
+        console.log(document.getElementsByClassName("possible"))
     }
 }
