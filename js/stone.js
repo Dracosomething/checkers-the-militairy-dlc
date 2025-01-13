@@ -49,7 +49,7 @@ class stone {
         }
         switch (piece._turn) {
             case "black":
-                if(BlackPieces.length <= 0){
+                if (BlackPieces.length <= 0) {
                     alertWin("white")
                 }
                 for (let j = 0; j < BlackPieces.length; j++) {
@@ -58,7 +58,7 @@ class stone {
                 }
                 break
             case "white":
-                if(WhitePieces.length <= 0){
+                if (WhitePieces.length <= 0) {
                     alertWin("black")
                 }
                 for (let j = 0; j < WhitePieces.length; j++) {
@@ -102,7 +102,7 @@ class stone {
                 possibleSquares[0].classList.remove("possible");
             }
         }
-        switch (piece._turn){
+        switch (piece._turn) {
             case "black":
                 let white = document.createElement('img');
                 white.src = 'assets/stone-white.png';
@@ -245,10 +245,29 @@ class stone {
                 }
             }
         }
-        if (document.getElementsByClassName("selected").length > 1) {
-            if (rowList[row.rowIndex + 2] != null && rowList[row.rowIndex - 2] != null) {
-                if (!rowList[row.rowIndex + 2].cells[cell.cellIndex].classList.contains("possible") && !rowList[row.rowIndex - 2].cells[cell.cellIndex].classList.contains("possible")) {
-                    if (!document.getElementsByClassName("selected").length < 1) {
+        if (document.getElementsByClassName("selected") != null) {
+            // console.log(row.rowIndex == (0 || 1 || 10 || 11))
+            if (document.getElementsByClassName("selected").length > 1) {
+                if (rowList[row.rowIndex + 2] != null && rowList[row.rowIndex - 2] != null) {
+                    if (!rowList[row.rowIndex + 2].cells[cell.cellIndex].classList.contains("possible")) {
+                        if (!document.getElementsByClassName("selected").length < 1) {
+                            console.log("terewrw")
+                            let selected = document.getElementsByClassName("selected")
+                            for (let i = 0; i < document.getElementsByClassName("selected").length; i++) {
+                                document.getElementsByClassName("selected")[0].classList.remove("selected")
+                            }
+                            for (let x = 0; x < document.getElementsByClassName("possible").length; x++) {
+                                document.getElementsByClassName("possible")[x].removeEventListener("click", piece.attack)
+                                if (x != 0) {
+                                    document.getElementsByClassName("possible")[x].classList.remove("possible")
+                                }
+                            }
+                            document.getElementsByClassName("possible")[0].addEventListener("click", piece.attack)
+                            selected[0].classList.add("selected")
+                            piece.possible = true
+                        }
+                        piece.possible = true
+                    } else if (!rowList[row.rowIndex - 2].cells[cell.cellIndex].classList.contains("possible")) {
                         let selected = document.getElementsByClassName("selected")
                         for (let i = 0; i < document.getElementsByClassName("selected").length; i++) {
                             document.getElementsByClassName("selected")[0].classList.remove("selected")
@@ -263,9 +282,39 @@ class stone {
                         selected[0].classList.add("selected")
                         piece.possible = true
                     }
-                    piece.possible = true
+                } else if (row.rowIndex == 0 || row.rowIndex == 1 || row.rowIndex == 10 || row.rowIndex == 11) {
+                    console.log(rowList[row.rowIndex + 2] != null)
+                    console.log(rowList[row.rowIndex - 2] != null)
+                    if (rowList[row.rowIndex + 2] != null && !rowList[row.rowIndex + 2].cells[cell.cellIndex].classList.contains("possible")) {
+                        console.log("terewrw")
+                        let selected = document.getElementsByClassName("selected")
+                        document.getElementsByClassName("selected")[1].classList.remove("selected")
+                        for (let x = 0; x < document.getElementsByClassName("possible").length; x++) {
+                            document.getElementsByClassName("possible")[x].removeEventListener("click", piece.attack)
+                            if (x != 1) {
+                                document.getElementsByClassName("possible")[x].classList.remove("possible")
+                            }
+                        }
+                        document.getElementsByClassName("possible")[0].addEventListener("click", piece.attack)
+                        selected[1].classList.add("selected")
+                        piece.possible = true
+                        piece.possible = true
+                    } else if (rowList[row.rowIndex - 2] != null && !rowList[row.rowIndex - 2].cells[cell.cellIndex].classList.contains("possible")) {
+                        console.log("efwef")
+                        let selected = document.getElementsByClassName("selected")
+                        document.getElementsByClassName("selected")[1].classList.remove("selected")
+                        for (let x = 0; x < document.getElementsByClassName("possible").length; x++) {
+                            document.getElementsByClassName("possible")[x].removeEventListener("click", piece.attack)
+                            if (x != 1) {
+                                document.getElementsByClassName("possible")[x].classList.remove("possible")
+                            }
+                        }
+                        document.getElementsByClassName("possible")[0].addEventListener("click", piece.attack)
+                        selected[0].classList.add("selected")
+                        piece.possible = true
+                    }
                 }
-            } else {
+            } else if (document.getElementsByClassName("selected").length == 1) {
                 let numb = Math.floor(Math.random() * document.getElementsByClassName("selected").length)
                 if (document.getElementsByClassName("selected").length > 1) {
                     for (let i = 0; i < document.getElementsByClassName("selected").length; i++) {
@@ -278,10 +327,12 @@ class stone {
                         }
                     }
                 }
+                console.log(document.getElementsByClassName("possible"))
                 document.getElementsByClassName("possible")[0].addEventListener("click", piece.attack)
                 document.getElementsByClassName("selected")[numb].classList.add("selected")
             }
-            piece.possible = true
         }
+        piece.possible = true
+
     }
 }
