@@ -49,7 +49,7 @@ class stone {
         }
         switch (piece._turn) {
             case "black":
-                if(blackPieces.length == 0){
+                if(BlackPieces.length <= 0){
                     alertWin("white")
                 }
                 for (let j = 0; j < BlackPieces.length; j++) {
@@ -58,7 +58,7 @@ class stone {
                 }
                 break
             case "white":
-                if(WhitePieces.length == 0){
+                if(WhitePieces.length <= 0){
                     alertWin("black")
                 }
                 for (let j = 0; j < WhitePieces.length; j++) {
@@ -107,13 +107,13 @@ class stone {
                 let white = document.createElement('img');
                 white.src = 'assets/stone-white.png';
                 white.className = "score_counter"
-                score_black.appendChild(white)
+                scoreBlack.appendChild(white)
                 break
             case "white":
                 let black = document.createElement('img');
                 black.src = 'assets/stone-black.png';
                 black.className = "score_counter"
-                score_white.appendChild(black)
+                scoreWhite.appendChild(black)
                 break
         }
         piece._turn = turn == "black" ? "white" : "black"

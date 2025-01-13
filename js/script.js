@@ -6,8 +6,8 @@ var WhiteSquares = document.getElementsByClassName("white")
 let player = document.getElementById("turn-show")
 let generateButton = document.getElementById("generateButton")
 
-let score_white = document.getElementById("score-white")
-let score_black = document.getElementById("score-black")
+let scoreWhite = document.getElementById("score-white")
+let scoreBlack = document.getElementById("score-black")
 
 const rowList = document.querySelectorAll("table tr")
 
