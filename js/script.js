@@ -46,7 +46,6 @@ function generateField() {
 
 function setUpBlack(event) {
     if (!piece._possible) {
-        console.log(piece.possible)
         if (piece._turn == "Black") {
             const cell = event.target.closest('td');
             if (!cell) { return; }
@@ -115,7 +114,6 @@ function setUpBlack(event) {
 
 function setUpWhite(event) {
     if (!piece._possible) {
-        console.log(piece.possible)
         if (piece._turn == "White") {
             const cell = event.target.closest('td');
             if (!cell) { return; }
