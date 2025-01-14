@@ -37,14 +37,17 @@ function generateField() {
         blackPiece.appendChild(black)
         blackPiece.classList.add("occupied")
     }
-    piece._turn = Math.floor(Math.random() * 10) + 1 >= 5 ? "white" : "black"
+    piece._turn = Math.floor(Math.random() * 10) + 1 >= 5 ? "White" : "Black"
+    piece._possible = false;
+    console.log(piece._possible)
     player.children[0].innerHTML = piece._turn
     generateButton.setAttribute('disabled', 'false');
 }
 
 function setUpBlack(event) {
-    if (!piece.possible) {
-        if (piece._turn == "black") {
+    if (!piece._possible) {
+        console.log(piece.possible)
+        if (piece._turn == "Black") {
             const cell = event.target.closest('td');
             if (!cell) { return; }
             const row = cell.parentElement;
@@ -111,8 +114,9 @@ function setUpBlack(event) {
 }
 
 function setUpWhite(event) {
-    if (!piece.possible) {
-        if (piece._turn == "white") {
+    if (!piece._possible) {
+        console.log(piece.possible)
+        if (piece._turn == "White") {
             const cell = event.target.closest('td');
             if (!cell) { return; }
             const row = cell.parentElement;
