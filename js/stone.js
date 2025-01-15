@@ -1,29 +1,37 @@
 var turn;
+// all normal pieces
 var BlackPieces = document.getElementsByClassName("Black-Piece")
 var WhitePieces = document.getElementsByClassName("White-Piece")
+// all dam pieces
 var BlackDam = document.getElementsByClassName("dam Black-Piece");
 var WhiteDam = document.getElementsByClassName("dam White-Piece");
 
 class stone {
     constructor() { }
 
+    // some variables
     kill_counter;
 
     possible;
 
     target;
 
+    // allows to get possible
     get _possible() {
         return piece.possible;
     }
 
+    // allows to set possible
     set _possible(possible) {
         piece.possible = possible
     }
 
+    // gets the turn
     get _turn() {
         return turn;
     }
+
+    // runs when we assign a new value to turn, used for everything needed to happen when a turn ends
     set _turn(side) {
         turn = side
         var selected = document.getElementsByClassName("selected");
@@ -110,6 +118,7 @@ class stone {
         piece.kill_counter = 0;
     }
 
+    // movement function
     move(event) {
         document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
         event.target.appendChild(document.getElementsByClassName("selected")[0])
@@ -126,6 +135,7 @@ class stone {
         player.children[0].innerHTML = piece._turn
     }
 
+    // attack function
     attack(target, newSquare) {
         document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
         newSquare.appendChild(document.getElementsByClassName("selected")[0])
@@ -169,6 +179,7 @@ class stone {
         }
     }
 
+    // allows for event listeners to be used properly
     TopLeft(event) {
         let target = event.target
         const cell = target.closest("td")
@@ -205,6 +216,7 @@ class stone {
         piece.attack(target, newSquare)
     }
 
+    // optional attacking
     attackCheck(event) {
         var possibleSquares = document.getElementsByClassName("possible");
         let x = possibleSquares.length;
@@ -290,6 +302,7 @@ class stone {
         }
     }
 
+    // checks for attack possibilities
     forceAttack(stone, opposing) {
         const cell = stone.closest('td');
         if (!cell) { return; }
@@ -392,7 +405,7 @@ class stone {
         return bool;
     }
 
-
+// movement for black
     setUpBlack(event) {
         if (!piece._possible) {
             if (piece._turn == "Black") {
@@ -462,6 +475,7 @@ class stone {
         }
     }
 
+    // movement for white
     setUpWhite(event) {
         if (!piece._possible) {
             if (piece._turn == "White") {
