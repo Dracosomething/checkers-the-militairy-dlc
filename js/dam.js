@@ -132,13 +132,13 @@ class dam extends stone {
                         console.log(i)
                         if (rowList[row.rowIndex - i] != null) {
                             cellList = rowList[row.rowIndex - i].cells;
-                            if (cellList[cell.cellIndex]  != null && cellList[cell.cellIndex].classList.contains("black")) {
-                            } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex].classList.contains("occupied")) {
-                                    cellList[cell.cellIndex].classList.add("possible")
-                                    cellList[cell.cellIndex].addEventListener("click", piece.move)
-                                }
-                            }
+                            // if (cellList[cell.cellIndex]  != null && cellList[cell.cellIndex].classList.contains("black")) {
+                            // } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
+                            //     if (!cellList[cell.cellIndex].classList.contains("occupied")) {
+                            //         cellList[cell.cellIndex].classList.add("possible")
+                            //         cellList[cell.cellIndex].addEventListener("click", piece.move)
+                            //     }
+                            // }
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
                                 if (!cellList[cell.cellIndex + i].classList.contains("occupied")) {
@@ -157,13 +157,13 @@ class dam extends stone {
                         }
                         if (rowList[row.rowIndex + i] != null) {
                             cellList = rowList[row.rowIndex + i].cells;
-                            if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("black")) {
-                            } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex].classList.contains("occupied")) {
-                                    cellList[cell.cellIndex].classList.add("possible")
-                                    cellList[cell.cellIndex].addEventListener("click", piece.move)
-                                }
-                            }
+                            // if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("black")) {
+                            // } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
+                            //     if (!cellList[cell.cellIndex].classList.contains("occupied")) {
+                            //         cellList[cell.cellIndex].classList.add("possible")
+                            //         cellList[cell.cellIndex].addEventListener("click", piece.move)
+                            //     }
+                            // }
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
                                 if (!cellList[cell.cellIndex + i].classList.contains("occupied")) {

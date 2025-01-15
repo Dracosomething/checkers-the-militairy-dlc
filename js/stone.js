@@ -424,7 +424,7 @@ class stone {
                 var possibleSquares = document.getElementsByClassName("possible");
                 var x = possibleSquares.length;
                 if (possibleSquares.length != 0) {
-                    for (let i = 0; i <= x; i++) {
+                    for (let i = 0; i < x; i++) {
                         possibleSquares[0].removeEventListener("click", piece.move);
                         possibleSquares[0].classList.remove("possible");
                     }
@@ -494,7 +494,7 @@ class stone {
                 var possibleSquares = document.getElementsByClassName("possible");
                 var x = possibleSquares.length;
                 if (possibleSquares.length != 0) {
-                    for (let i = 0; i <= x; i++) {
+                    for (let i = 0; i < x; i++) {
                         possibleSquares[0].removeEventListener("click", piece.move);
                         possibleSquares[0].classList.remove("possible");
                     }

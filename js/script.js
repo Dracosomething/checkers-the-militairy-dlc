@@ -31,16 +31,16 @@ var oldturn = piece._turn
 // fill the board with pieces
 function generateField() {
     // for loops running for all start positions
-    for (let i = 0; i < whitePieces.length; i++) {
-        // create the piece
-        let white = document.createElement('img');
-        white.src = 'assets/stone_white.png';
-        white.className = "White-Piece"
-        let whitePiece = whitePieces[i];
-        white.addEventListener("click", piece.setUpWhite)
-        whitePiece.appendChild(white)
-        whitePiece.classList.add("occupied")
-    }
+    // for (let i = 0; i < whitePieces.length; i++) {
+    //     // create the piece
+    //     let white = document.createElement('img');
+    //     white.src = 'assets/stone_white.png';
+    //     white.className = "White-Piece"
+    //     let whitePiece = whitePieces[i];
+    //     white.addEventListener("click", piece.setUpWhite)
+    //     whitePiece.appendChild(white)
+    //     whitePiece.classList.add("occupied")
+    // }
     for (let i = 0; i < blackPieces.length; i++) {
         let black = document.createElement('img');
         black.src = 'assets/stone_black.png';
@@ -67,17 +67,26 @@ function getTarget(index) {
 }
 
 // win alert
-function alertWin(color){
-    document.getElementById("round-win-"+color).innerHTML = color + ': ' +1
+function alertWin(color) {
+    let numb
+    if (document.getElementById("round-win-" + color).innerHTML != null) {
+        numb = document.getElementById("round-win-" + color).innerText;
+        numb++;
+    }
+    else {
+        numb = 1
+    }
+    document.getElementById("round-win-" + color).innerHTML = numb
+
     generateButton.removeAttribute('disabled')
-    for(let i = 0; i < WhiteSquares.length; i++){
-        if(WhiteSquares[i] != null && WhiteSquares[i].children[0] != null){
+    for (let i = 0; i < WhiteSquares.length; i++) {
+        if (WhiteSquares[i] != null && WhiteSquares[i].children[0] != null) {
             console.log(WhiteSquares[i].children[0])
             WhiteSquares[i].children[0].remove();
         }
     }
-    for(let i = 0; i < BlackSquares.length; i++){
-        if(BlackSquares[i] != null && BlackSquares[i].children[0] != null){
+    for (let i = 0; i < BlackSquares.length; i++) {
+        if (BlackSquares[i] != null && BlackSquares[i].children[0] != null) {
             console.log(BlackSquares[i])
             BlackSquares[i].children[0].remove();
         }
