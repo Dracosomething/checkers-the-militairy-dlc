@@ -5,6 +5,10 @@ class dam extends stone {
 
     // black dam movement code
     setUpBlack(event) {
+        let booldownleft = true;
+        let booldownright = true;
+        let boolupleft = true;
+        let boolupright = true;
         if (!piece._possible) {
             if (piece._turn == "Black") {
                 if (event.target.classList.contains("dam")) {
@@ -48,7 +52,10 @@ class dam extends stone {
                             cellList = rowList[row.rowIndex + i].cells;
                             if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex - i].classList.contains("occupied")) {
+                                if(cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")){
+                                    boolupleft = false;
+                                }
+                                if (boolupleft && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex - i].classList.add("possible")
                                     cellList[cell.cellIndex - i].addEventListener("click", piece.move)
                                 }
@@ -56,7 +63,10 @@ class dam extends stone {
                             cellList = rowList[row.rowIndex + i].cells;
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex + i].classList.contains("occupied")) {
+                                if(cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("White-Piece")){
+                                    boolupright = false;
+                                }
+                                if (boolupright && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex + i].classList.add("possible")
                                     cellList[cell.cellIndex + i].addEventListener("click", piece.move)
                                 }
@@ -66,7 +76,10 @@ class dam extends stone {
                             cellList = rowList[row.rowIndex - i].cells;
                             if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex - i].classList.contains("occupied")) {
+                                if(cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")){
+                                    booldownright = false;
+                                }
+                                if (booldownright && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex - i].classList.add("possible")
                                     cellList[cell.cellIndex - i].addEventListener("click", piece.move)
                                 }
@@ -74,7 +87,10 @@ class dam extends stone {
                             cellList = rowList[row.rowIndex - i].cells;
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex + i].classList.contains("occupied")) {
+                                if(cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("White-Piece")){
+                                    booldownleft = false;
+                                }
+                                if (booldownleft && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex + i].classList.add("possible")
                                     cellList[cell.cellIndex + i].addEventListener("click", piece.move)
                                 }
@@ -89,6 +105,10 @@ class dam extends stone {
 
     // white dam movement code
     setUpWhite(event) {
+        let booldownleft = true;
+        let booldownright = true;
+        let boolupleft = true;
+        let boolupright = true;
         if (!piece._possible) {
             if (piece._turn == "White") {
                 if (event.target.classList.contains("dam")) {
@@ -129,19 +149,14 @@ class dam extends stone {
                     }
 
                     for (let i = 0; i < rowList.length; i++) {
-                        console.log(i)
                         if (rowList[row.rowIndex - i] != null) {
                             cellList = rowList[row.rowIndex - i].cells;
-                            // if (cellList[cell.cellIndex]  != null && cellList[cell.cellIndex].classList.contains("black")) {
-                            // } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
-                            //     if (!cellList[cell.cellIndex].classList.contains("occupied")) {
-                            //         cellList[cell.cellIndex].classList.add("possible")
-                            //         cellList[cell.cellIndex].addEventListener("click", piece.move)
-                            //     }
-                            // }
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex + i].classList.contains("occupied")) {
+                                if(cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("Black-Piece")){
+                                    booldownleft = false;
+                                }
+                                if (booldownleft && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex + i].classList.add("possible")
                                     cellList[cell.cellIndex + i].addEventListener("click", piece.move)
                                 }
@@ -149,7 +164,10 @@ class dam extends stone {
                             cellList = rowList[row.rowIndex - i].cells;
                             if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex - i].classList.contains("occupied")) {
+                                if(cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("Black-Piece")){
+                                    booldownright = false;
+                                }
+                                if (booldownright && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex - i].classList.add("possible")
                                     cellList[cell.cellIndex - i].addEventListener("click", piece.move)
                                 }
@@ -157,16 +175,12 @@ class dam extends stone {
                         }
                         if (rowList[row.rowIndex + i] != null) {
                             cellList = rowList[row.rowIndex + i].cells;
-                            // if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("black")) {
-                            // } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
-                            //     if (!cellList[cell.cellIndex].classList.contains("occupied")) {
-                            //         cellList[cell.cellIndex].classList.add("possible")
-                            //         cellList[cell.cellIndex].addEventListener("click", piece.move)
-                            //     }
-                            // }
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex + i].classList.contains("occupied")) {
+                                if(cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("Black-Piece")){
+                                    boolupleft = false;
+                                }
+                                if (boolupleft && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex + i].classList.add("possible")
                                     cellList[cell.cellIndex + i].addEventListener("click", piece.move)
                                 }
@@ -174,7 +188,10 @@ class dam extends stone {
                             cellList = rowList[row.rowIndex + i].cells;
                             if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
-                                if (!cellList[cell.cellIndex - i].classList.contains("occupied")) {
+                                if(cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("Black-P iece")){
+                                    boolupright = false;
+                                }
+                                if (boolupright && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex - i].classList.add("possible")
                                     cellList[cell.cellIndex - i].addEventListener("click", piece.move)
                                 }

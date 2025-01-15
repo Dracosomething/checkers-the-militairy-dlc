@@ -31,16 +31,16 @@ var oldturn = piece._turn
 // fill the board with pieces
 function generateField() {
     // for loops running for all start positions
-    // for (let i = 0; i < whitePieces.length; i++) {
-    //     // create the piece
-    //     let white = document.createElement('img');
-    //     white.src = 'assets/stone_white.png';
-    //     white.className = "White-Piece"
-    //     let whitePiece = whitePieces[i];
-    //     white.addEventListener("click", piece.setUpWhite)
-    //     whitePiece.appendChild(white)
-    //     whitePiece.classList.add("occupied")
-    // }
+    for (let i = 0; i < whitePieces.length; i++) {
+        // create the piece
+        let white = document.createElement('img');
+        white.src = 'assets/stone_white.png';
+        white.className = "White-Piece"
+        let whitePiece = whitePieces[i];
+        white.addEventListener("click", piece.setUpWhite)
+        whitePiece.appendChild(white)
+        whitePiece.classList.add("occupied")
+    }
     for (let i = 0; i < blackPieces.length; i++) {
         let black = document.createElement('img');
         black.src = 'assets/stone_black.png';
