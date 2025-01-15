@@ -62,6 +62,10 @@ class stone {
                 if (BlackPieces.length <= 0) {
                     alertWin("white")
                 }
+                for (let j = 0; j < WhitePieces.length; j++) {
+                    let stone = WhitePieces[j]
+                    stone.removeEventListener("click", piece.attackCheck)
+                }
                 for (let j = 0; j < BlackPieces.length; j++) {
                     let stone = BlackPieces[j]
                     piece.forceAttack(stone, "White")
@@ -74,6 +78,10 @@ class stone {
                 for (let j = 0; j < BlackPieces.length; j++) {
                     let stone = BlackPieces[j]
                     stone.removeEventListener("click", piece.attackCheck)
+                }
+                for (let j = 0; j < WhitePieces.length; j++) {
+                    let stone = WhitePieces[j]
+                    piece.forceAttack(stone, "Black")
                 }
                 break
         }
@@ -106,10 +114,12 @@ class stone {
         let x = possibleSquares.length;
         if (possibleSquares.length != 0) {
             for (let i = 0; i < x; i++) {
-                possibleSquares[0].removeEventListener("click", piece.BottomLeft)
-                possibleSquares[0].removeEventListener("click", piece.BottomRight)
-                possibleSquares[0].removeEventListener("click", piece.TopLeft)
-                possibleSquares[0].removeEventListener("click", piece.TopRight)
+                if (possibleSquares[0].children[0] != null) {
+                    possibleSquares[0].children[0].removeEventListener("click", piece.BottomLeft)
+                    possibleSquares[0].children[0].removeEventListener("click", piece.BottomRight)
+                    possibleSquares[0].children[0].removeEventListener("click", piece.TopLeft)
+                    possibleSquares[0].children[0].removeEventListener("click", piece.TopRight)
+                }
                 possibleSquares[0].classList.remove("possible");
             }
         }
@@ -178,10 +188,12 @@ class stone {
         let x = possibleSquares.length;
         if (possibleSquares.length != 0) {
             for (let i = 0; i < x; i++) {
-                possibleSquares[0].children[0].removeEventListener("click", piece.BottomLeft)
-                possibleSquares[0].children[0].removeEventListener("click", piece.BottomRight)
-                possibleSquares[0].children[0].removeEventListener("click", piece.TopLeft)
-                possibleSquares[0].children[0].removeEventListener("click", piece.TopRight)
+                if (possibleSquares[0].children[0] != null) {
+                    possibleSquares[0].children[0].removeEventListener("click", piece.BottomLeft)
+                    possibleSquares[0].children[0].removeEventListener("click", piece.BottomRight)
+                    possibleSquares[0].children[0].removeEventListener("click", piece.TopLeft)
+                    possibleSquares[0].children[0].removeEventListener("click", piece.TopRight)
+                }
                 possibleSquares[0].classList.remove("possible");
             }
         }
@@ -328,10 +340,12 @@ class stone {
             let x = possibleSquares.length;
             if (possibleSquares.length != 0) {
                 for (let i = 0; i < x; i++) {
-                    possibleSquares[0].removeEventListener("click", piece.BottomLeft)
-                    possibleSquares[0].removeEventListener("click", piece.BottomRight)
-                    possibleSquares[0].removeEventListener("click", piece.TopLeft)
-                    possibleSquares[0].removeEventListener("click", piece.TopRight)
+                    if (possibleSquares[0].children[0] != null) {
+                        possibleSquares[0].children[0].removeEventListener("click", piece.BottomLeft)
+                        possibleSquares[0].children[0].removeEventListener("click", piece.BottomRight)
+                        possibleSquares[0].children[0].removeEventListener("click", piece.TopLeft)
+                        possibleSquares[0].children[0].removeEventListener("click", piece.TopRight)
+                    }
                     possibleSquares[0].classList.remove("possible");
                 }
             }
