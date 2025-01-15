@@ -1,6 +1,8 @@
 var turn;
 var BlackPieces = document.getElementsByClassName("Black-Piece")
 var WhitePieces = document.getElementsByClassName("White-Piece")
+var BlackDam = document.getElementsByClassName("dam Black-Piece");
+var WhiteDam = document.getElementsByClassName("dam White-Piece");
 
 class stone {
     constructor() { }
@@ -59,6 +61,16 @@ class stone {
         }
         switch (piece._turn) {
             case "Black":
+                for (let j = 0; j < WhitePieces.length; j++) {
+                    let stone = WhitePieces[j];
+                    if (stone.parentElement != null && stone.parentElement.parentElement != null && stone.parentElement.parentElement.id == "end-black" && !stone.classList.contains("dam")) {
+                        console.log(stone + " can evolve")
+                        stone.classList.add("dam")
+                        stone.src = 'assets/dam_white.png';
+                        stone.removeEventListener("click", piece.setUpWhite)
+                        stone.addEventListener("click", dam_piece.setUpWhite)
+                    }
+                }
                 if (BlackPieces.length <= 0) {
                     alertWin("white")
                 }
@@ -72,6 +84,16 @@ class stone {
                 }
                 break
             case "White":
+                for (let j = 0; j < BlackPieces.length; j++) {
+                    let stone = BlackPieces[j];
+                    if (stone.parentElement != null && stone.parentElement.parentElement != null && stone.parentElement.parentElement.id == "end-white" && !stone.classList.contains("dam")) {
+                        console.log(stone + " can evolve")
+                        stone.classList.add("dam")
+                        stone.src = 'assets/dam_black.png';
+                        stone.removeEventListener("click", piece.setUpBlack)
+                        stone.addEventListener("click", dam_piece.setUpBlack)
+                    }
+                }
                 if (WhitePieces.length <= 0) {
                     alertWin("black")
                 }
@@ -126,13 +148,13 @@ class stone {
         switch (piece._turn) {
             case "Black":
                 let white = document.createElement('img');
-                white.src = 'assets/stone-white.png';
+                white.src = 'assets/stone_white.png';
                 white.className = "score_counter"
                 scoreBlack.appendChild(white)
                 break
             case "White":
                 let black = document.createElement('img');
-                black.src = 'assets/stone-black.png';
+                black.src = 'assets/stone_black.png';
                 black.className = "score_counter"
                 scoreWhite.appendChild(black)
                 break
@@ -206,7 +228,6 @@ class stone {
         }
         let stone = event.target
         let opposing = piece._turn;
-        console.log(piece._turn)
         const cell = stone.closest('td');
         if (!cell) { return; }
         const row = cell.parentElement;
@@ -278,7 +299,7 @@ class stone {
         if (rowList[row.rowIndex + 1] != null) {
             cellList = rowList[row.rowIndex + 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
+            } else if (cellList[cell.cellIndex - 2] != null && rowList[row.rowIndex + 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
                     cellList = rowList[row.rowIndex + 1].cells
@@ -292,7 +313,7 @@ class stone {
             }
             cellList = rowList[row.rowIndex + 1].cells;
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
+            } else if (cellList[cell.cellIndex + 2] != null && rowList[row.rowIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex + 2].cells;
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
                     cellList = rowList[row.rowIndex + 1].cells;
@@ -308,7 +329,7 @@ class stone {
         if (rowList[row.rowIndex - 1] != null) {
             cellList = rowList[row.rowIndex - 1].cells;
             if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
+            } else if (cellList[cell.cellIndex - 2] != null && rowList[row.rowIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
                 if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
                     cellList = rowList[row.rowIndex - 1].cells;
@@ -322,7 +343,7 @@ class stone {
             }
             cellList = rowList[row.rowIndex - 1].cells;
             if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
+            } else if (cellList[cell.cellIndex + 2] != null && rowList[row.rowIndex - 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
                 cellList = rowList[row.rowIndex - 2].cells;
                 if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
                     cellList = rowList[row.rowIndex - 1].cells;
@@ -369,5 +390,152 @@ class stone {
             }
         }
         return bool;
+    }
+
+
+    setUpBlack(event) {
+        if (!piece._possible) {
+            if (piece._turn == "Black") {
+                const cell = event.target.closest('td');
+                if (!cell) { return; }
+                const row = cell.parentElement;
+
+                var selected = document.getElementsByClassName("selected");
+                if (selected.length != 0) {
+                    for (let i = 0; i <= selected.length; i++) {
+                        selected[0].classList.remove("selected");
+                    }
+                }
+
+                var possibleSquares = document.getElementsByClassName("possible");
+                var x = possibleSquares.length;
+                if (possibleSquares.length != 0) {
+                    for (let i = 0; i <= x; i++) {
+                        possibleSquares[0].removeEventListener("click", piece.move);
+                        possibleSquares[0].classList.remove("possible");
+                    }
+                }
+
+                var targets = document.getElementsByClassName("target");
+                if (targets.length != 0) {
+                    for (let i = 0; i <= targets.length; i++) {
+                        targets[0].classList.remove("target");
+                    }
+                }
+
+                var targetSquares = document.getElementsByClassName("target");
+                let y = targetSquares.length;
+                if (targetSquares.length != 0) {
+                    for (let i = 0; i < y; i++) {
+                        targetSquares[0].removeEventListener("click", piece.move);
+                        targetSquares[0].classList.remove("possible");
+                    }
+                }
+                if (rowList[row.rowIndex + 1] != null) {
+                    cellList = rowList[row.rowIndex + 1].cells;
+                    if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
+                    }
+                    cellList = rowList[row.rowIndex + 1].cells;
+                    if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
+                    }
+                }
+                if (rowList[row.rowIndex - 1] != null) {
+                    cellList = rowList[row.rowIndex - 1].cells;
+                    if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
+                    } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white")) {
+                        if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
+                            cellList[cell.cellIndex - 1].classList.add("possible")
+                            cellList[cell.cellIndex - 1].addEventListener("click", piece.move)
+                        }
+                    }
+                    cellList = rowList[row.rowIndex - 1].cells;
+                    if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
+                    } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white")) {
+                        if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
+                            cellList[cell.cellIndex + 1].classList.add("possible")
+                            cellList[cell.cellIndex + 1].addEventListener("click", piece.move)
+                        }
+                    }
+                }
+                event.target.classList.add("selected")
+            }
+        }
+    }
+
+    setUpWhite(event) {
+        if (!piece._possible) {
+            if (piece._turn == "White") {
+                const cell = event.target.closest('td');
+                if (!cell) { return; }
+                const row = cell.parentElement;
+
+                var selected = document.getElementsByClassName("selected");
+                if (selected.length != 0) {
+                    for (let i = 0; i <= selected.length; i++) {
+                        selected[0].classList.remove("selected");
+                    }
+                }
+
+                var targets = document.getElementsByClassName("target");
+                if (targets.length != 0) {
+                    for (let i = 0; i <= targets.length; i++) {
+                        targets[0].classList.remove("target");
+                    }
+                }
+
+                var possibleSquares = document.getElementsByClassName("possible");
+                let x = possibleSquares.length;
+                if (possibleSquares.length != 0) {
+                    for (let i = 0; i < x; i++) {
+                        possibleSquares[0].removeEventListener("click", piece.move);
+                        possibleSquares[0].classList.remove("possible");
+                    }
+                }
+
+                var targetSquares = document.getElementsByClassName("target");
+                let y = targetSquares.length;
+                if (targetSquares.length != 0) {
+                    for (let i = 0; i < y; i++) {
+                        targetSquares[0].removeEventListener("click", piece.move);
+                        targetSquares[0].classList.remove("possible");
+                    }
+                }
+
+                if (rowList[row.rowIndex - 1] != null) {
+                    cellList = rowList[row.rowIndex - 1].cells;
+                    if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
+                    }
+                    cellList = rowList[row.rowIndex - 1].cells;
+                    if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
+                    }
+                }
+                if (rowList[row.rowIndex + 1] != null) {
+                    cellList = rowList[row.rowIndex + 1].cells;
+                    if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("black")) {
+                    } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
+                        if (!cellList[cell.cellIndex].classList.contains("occupied")) {
+                            cellList[cell.cellIndex].classList.add("possible")
+                            cellList[cell.cellIndex].addEventListener("click", piece.move)
+                        }
+                    }
+                    if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
+                    } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white")) {
+                        if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
+                            cellList[cell.cellIndex + 1].classList.add("possible")
+                            cellList[cell.cellIndex + 1].addEventListener("click", piece.move)
+                        }
+                    }
+                    cellList = rowList[row.rowIndex + 1].cells;
+                    if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
+                    } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white")) {
+                        if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
+                            cellList[cell.cellIndex - 1].classList.add("possible")
+                            cellList[cell.cellIndex - 1].addEventListener("click", piece.move)
+                        }
+                    }
+                }
+                event.target.classList.add("selected")
+            }
+        }
     }
 }
