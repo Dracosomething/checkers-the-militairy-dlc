@@ -68,5 +68,18 @@ function getTarget(index) {
 
 // win alert
 function alertWin(color){
-    alert(color + " won")
+    document.getElementById("round-win-"+color).innerHTML = color + ': ' +1
+    generateButton.removeAttribute('disabled')
+    for(let i = 0; i < WhiteSquares.length; i++){
+        if(WhiteSquares[i] != null && WhiteSquares[i].children[0] != null){
+            console.log(WhiteSquares[i].children[0])
+            WhiteSquares[i].children[0].remove();
+        }
+    }
+    for(let i = 0; i < BlackSquares.length; i++){
+        if(BlackSquares[i] != null && BlackSquares[i].children[0] != null){
+            console.log(BlackSquares[i])
+            BlackSquares[i].children[0].remove();
+        }
+    }
 }

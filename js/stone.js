@@ -42,19 +42,19 @@ class stone {
         }
 
         var possibleSquares = document.getElementsByClassName("possible");
+        let x = possibleSquares.length
         if (possibleSquares.length != 0) {
-            for (let i = 0; i <= possibleSquares.length; i++) {
+            for (let i = 0; i <= x; i++) {
                 possibleSquares[0].removeEventListener("click", piece.move);
                 possibleSquares[0].classList.remove("possible");
             }
         }
 
-        var targetSquares = document.getElementsByClassName("target");
+        var targetSquares = document.getElementsByClassName("possible-attack");
         let y = targetSquares.length;
         if (targetSquares.length != 0) {
             for (let i = 0; i < y; i++) {
-                targetSquares[0].removeEventListener("click", piece.move);
-                targetSquares[0].classList.remove("possible");
+                targetSquares[0].classList.remove("possible-attack");
             }
         }
 
@@ -398,6 +398,7 @@ class stone {
             if (selected.length != 0) {
                 for (let i = 0; i <= selected.length; i++) {
                     selected[0].addEventListener("click", piece.attackCheck)
+                    selected[0].parentElement.classList.add("possible-attack")
                     selected[0].classList.remove("selected");
                 }
             }
@@ -405,7 +406,7 @@ class stone {
         return bool;
     }
 
-// movement for black
+    // movement for black
     setUpBlack(event) {
         if (!piece._possible) {
             if (piece._turn == "Black") {
@@ -490,19 +491,19 @@ class stone {
                     }
                 }
 
+                var possibleSquares = document.getElementsByClassName("possible");
+                var x = possibleSquares.length;
+                if (possibleSquares.length != 0) {
+                    for (let i = 0; i <= x; i++) {
+                        possibleSquares[0].removeEventListener("click", piece.move);
+                        possibleSquares[0].classList.remove("possible");
+                    }
+                }
+
                 var targets = document.getElementsByClassName("target");
                 if (targets.length != 0) {
                     for (let i = 0; i <= targets.length; i++) {
                         targets[0].classList.remove("target");
-                    }
-                }
-
-                var possibleSquares = document.getElementsByClassName("possible");
-                let x = possibleSquares.length;
-                if (possibleSquares.length != 0) {
-                    for (let i = 0; i < x; i++) {
-                        possibleSquares[0].removeEventListener("click", piece.move);
-                        possibleSquares[0].classList.remove("possible");
                     }
                 }
 

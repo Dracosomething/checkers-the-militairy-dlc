@@ -26,11 +26,11 @@ td {
     display: block;
 }
 
-.possible, .possible-attack {
+.possible {
     background-color: aquamarine;
 }
 
-.not-possible {
+.possible-attack {
     background-color: red;
 }
 
