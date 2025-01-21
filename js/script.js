@@ -25,8 +25,15 @@ var win;
 const piece = new stone();
 const dam_piece = new dam()
 
+import { stone } from "./stone.js"
+import { dam } from "./dam.js"
+
+export { rowList, player, piece, dam_piece, win, scoreBlack, scoreWhite, alertWin }
+
 // the previous turn
 var oldturn = piece._turn
+
+generateButton.addEventListener("click", generateField)
 
 // fill the board with pieces
 function generateField() {
