@@ -85,14 +85,16 @@ class stone {
                         stone.removeEventListener("click", main.piece.setUpWhite)
                         stone.addEventListener("click", main.dam_piece.setUpWhite)
                     }
-                
-                    console.log(stone)
-                    console.log(stone.parentElement)
+                }
+                for (let j = 0; j < BlackPieces.length; j++) {
+                    let stone = BlackPieces[j]
+                    // console.log(stone)
+                    // console.log(stone.parentElement)
                     stone.parentElement.removeEventListener("click", main.piece.BottomLeft)
                     stone.parentElement.removeEventListener("click", main.piece.BottomRight)
                     stone.parentElement.removeEventListener("click", main.piece.TopLeft)
-                    stone.parentElement.removeEventListener("click", main.piece.TopRight)
-                }
+                    stone.parentElement.removeEventListener("click", main.piece.TopRight) 
+               }
                 if (BlackPieces.length <= 0) {
                     main.alertWin("white")
                 }
@@ -115,13 +117,16 @@ class stone {
                         stone.removeEventListener("click", main.piece.setUpBlack)
                         stone.addEventListener("click", main.dam_piece.setUpBlack)
                     }
-                    console.log(stone)
-                    console.log(stone.parentElement)
+                }
+                for (let j = 0; j < WhitePieces.length; j++) {
+                    let stone = WhitePieces[j]
+                    // console.log(stone)
+                    // console.log(stone.parentElement)
                     stone.parentElement.removeEventListener("click", main.piece.BottomLeft)
                     stone.parentElement.removeEventListener("click", main.piece.BottomRight)
                     stone.parentElement.removeEventListener("click", main.piece.TopLeft)
-                    stone.parentElement.removeEventListener("click", main.piece.TopRight)
-                }
+                    stone.parentElement.removeEventListener("click", main.piece.TopRight) 
+               }
                 if (WhitePieces.length <= 0) {
                     main.alertWin("black")
                 }
