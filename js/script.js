@@ -1,3 +1,6 @@
+// import { stone } from "./_stone.js"
+// import { dam } from "./dam.js"
+
 // start positions
 var whitePieces = document.getElementsByClassName("startposWhite")
 var blackPieces = document.getElementsByClassName("startposBlack")
@@ -22,39 +25,37 @@ var target;
 var win;
 
 // create classes
-const piece = new stone();
-const dam_piece = new dam()
-
-import { stone } from "./stone.js"
-import { dam } from "./dam.js"
-
-export { rowList, player, piece, dam_piece, win, scoreBlack, scoreWhite, alertWin }
+const game = new stone();
+// const dam_piece = new dam();
 
 // the previous turn
-var oldturn = piece._turn
+// var oldturn = piece._turn
 
 generateButton.addEventListener("click", generateField)
 
 // fill the board with pieces
 function generateField() {
+    let piece;
     // for loops running for all start positions
     for (let i = 0; i < whitePieces.length; i++) {
         // create the piece
-        let white = document.createElement('img');
-        white.src = 'assets/stone_white.png';
-        white.className = "White-Piece"
+        piece = new stone();
+        console.log(piece instanceof stone)
+        piece.src = 'assets/stone_white.png';
+        piece.className = "White-Piece"
         let whitePiece = whitePieces[i];
-        white.addEventListener("click", piece.setUpWhite)
-        whitePiece.appendChild(white)
+        piece.addEventListener("click", piece.setUpWhite)
+        whitePiece.appendChild(piece)
         whitePiece.classList.add("occupied")
     }
     for (let i = 0; i < blackPieces.length; i++) {
-        let black = document.createElement('img');
-        black.src = 'assets/stone_black.png';
-        black.className = "Black-Piece"
+        piece = new stone();
+        console.log(piece instanceof stone)
+        piece.src = 'assets/stone_black.png';
+        piece.className = "Black-Piece"
         let blackPiece = blackPieces[i];
-        black.addEventListener("click", piece.setUpBlack)
-        blackPiece.appendChild(black)
+        piece.addEventListener("click", piece.setUpBlack)
+        blackPiece.appendChild(piece)
         blackPiece.classList.add("occupied")
     }
     // randomly assign a first turn
@@ -99,3 +100,5 @@ function alertWin(color) {
         }
     }
 }
+
+// export { rowList, piece, dam_piece, player, win, scoreBlack, scoreWhite, alertWin }

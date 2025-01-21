@@ -1,10 +1,9 @@
-let cellList;
+// import * as main from "./script.js";
+// import { stone } from "./_stone.js";
 
-import { stone } from "./stone.js";
-import * as main from "./script.js";
+// let cellList;
 
-// export class dam{}
-export { dam }
+// setTimeout(document.currentScript, 10)
 
 class dam extends stone {
     constructor() {
@@ -18,63 +17,63 @@ class dam extends stone {
         const row = cell.parentElement;
         let bool = false;
 
-        for (let i = 0; i < main.rowList.length; i++) {
-            if (main.rowList[row.rowIndex + i] != null) {
-                cellList = main.rowList[row.rowIndex + i].cells;
+        for (let i = 0; i < rowList.length; i++) {
+            if (rowList[row.rowIndex + i] != null) {
+                cellList = rowList[row.rowIndex + i].cells;
                 if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
-                } else if (cellList[cell.cellIndex - 2] != null && main.rowList[row.rowIndex + 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
-                    cellList = main.rowList[row.rowIndex + 2].cells;
+                } else if (cellList[cell.cellIndex - 2] != null && rowList[row.rowIndex + 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
+                    cellList = rowList[row.rowIndex + 2].cells;
                     if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
-                        cellList = main.rowList[row.rowIndex + 1].cells
-                        cellList[cell.cellIndex - 1].children[0].addEventListener("click", main.piece.TopLeft)
+                        cellList = rowList[row.rowIndex + 1].cells
+                        cellList[cell.cellIndex - 1].children[0].addEventListener("click", this.TopLeft)
                         cellList[cell.cellIndex - 1].classList.add("target")
                         cellList[cell.cellIndex - 1].classList.add("possible")
                         stone.classList.add("selected")
-                        main.piece._possible = true
+                        this._possible = true
                         bool = true;
                     }
                 }
-                cellList = main.rowList[row.rowIndex + 1].cells;
+                cellList = rowList[row.rowIndex + 1].cells;
                 if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-                } else if (cellList[cell.cellIndex + 2] != null && main.rowList[row.rowIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
-                    cellList = main.rowList[row.rowIndex + 2].cells;
+                } else if (cellList[cell.cellIndex + 2] != null && rowList[row.rowIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
+                    cellList = rowList[row.rowIndex + 2].cells;
                     if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
-                        cellList = main.rowList[row.rowIndex + 1].cells;
-                        cellList[cell.cellIndex + 1].children[0].addEventListener("click", main.piece.TopRight)
+                        cellList = rowList[row.rowIndex + 1].cells;
+                        cellList[cell.cellIndex + 1].children[0].addEventListener("click", this.TopRight)
                         cellList[cell.cellIndex + 1].classList.add("target")
                         cellList[cell.cellIndex + 1].classList.add("possible")
                         stone.classList.add("selected")
-                        main.piece._possible = true
+                        this._possible = true
                         bool = true;
                     }
                 }
             }
-            if (main.rowList[row.rowIndex - 1] != null) {
-                cellList = main.rowList[row.rowIndex - 1].cells;
+            if (rowList[row.rowIndex - 1] != null) {
+                cellList = rowList[row.rowIndex - 1].cells;
                 if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-                } else if (cellList[cell.cellIndex - 2] != null && main.rowList[row.rowIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
-                    cellList = main.rowList[row.rowIndex - 2].cells;
+                } else if (cellList[cell.cellIndex - 2] != null && rowList[row.rowIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
+                    cellList = rowList[row.rowIndex - 2].cells;
                     if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
-                        cellList = main.rowList[row.rowIndex - 1].cells;
-                        cellList[cell.cellIndex - 1].children[0].addEventListener("click", main.piece.BottomLeft)
+                        cellList = rowList[row.rowIndex - 1].cells;
+                        cellList[cell.cellIndex - 1].children[0].addEventListener("click", this.BottomLeft)
                         cellList[cell.cellIndex - 1].classList.add("target")
                         cellList[cell.cellIndex - 1].classList.add("possible")
                         stone.classList.add("selected")
-                        main.piece._possible = true
+                        this._possible = true
                         bool = true
                     }
                 }
-                cellList = main.rowList[row.rowIndex - 1].cells;
+                cellList = rowList[row.rowIndex - 1].cells;
                 if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-                } else if (cellList[cell.cellIndex + 2] != null && main.rowList[row.rowIndex - 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
-                    cellList = main.rowList[row.rowIndex - 2].cells;
+                } else if (cellList[cell.cellIndex + 2] != null && rowList[row.rowIndex - 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
+                    cellList = rowList[row.rowIndex - 2].cells;
                     if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
-                        cellList = main.rowList[row.rowIndex - 1].cells;
-                        cellList[cell.cellIndex + 1].children[0].addEventListener("click", main.piece.BottomRight)
+                        cellList = rowList[row.rowIndex - 1].cells;
+                        cellList[cell.cellIndex + 1].children[0].addEventListener("click", this.BottomRight)
                         cellList[cell.cellIndex + 1].classList.add("target")
                         cellList[cell.cellIndex + 1].classList.add("possible")
                         stone.classList.add("selected")
-                        main.piece._possible = true
+                        this._possible = true
                         bool = true
                     }
                 }
@@ -86,10 +85,10 @@ class dam extends stone {
             if (possibleSquares.length != 0) {
                 for (let i = 0; i < x; i++) {
                     if (possibleSquares[0].children[0] != null) {
-                        possibleSquares[0].children[0].removeEventListener("click", main.piece.BottomLeft)
-                        possibleSquares[0].children[0].removeEventListener("click", main.piece.BottomRight)
-                        possibleSquares[0].children[0].removeEventListener("click", main.piece.TopLeft)
-                        possibleSquares[0].children[0].removeEventListener("click", main.piece.TopRight)
+                        possibleSquares[0].children[0].removeEventListener("click", this.BottomLeft)
+                        possibleSquares[0].children[0].removeEventListener("click", this.BottomRight)
+                        possibleSquares[0].children[0].removeEventListener("click", this.TopLeft)
+                        possibleSquares[0].children[0].removeEventListener("click", this.TopRight)
                     }
                     possibleSquares[0].classList.remove("possible");
                 }
@@ -97,10 +96,10 @@ class dam extends stone {
             if (document.getElementsByClassName("target").length != 0) {
                 for (let i = 0; i < document.getElementsByClassName("target").length; i++) {
                     {
-                        document.getElementsByClassName("target")[0].children[0].removeEventListener("click", main.piece.BottomLeft)
-                        document.getElementsByClassName("target")[0].children[0].removeEventListener("click", main.piece.BottomRight)
-                        document.getElementsByClassName("target")[0].children[0].removeEventListener("click", main.piece.TopLeft)
-                        document.getElementsByClassName("target")[0].children[0].removeEventListener("click", main.piece.TopRight)
+                        document.getElementsByClassName("target")[0].children[0].removeEventListener("click", this.BottomLeft)
+                        document.getElementsByClassName("target")[0].children[0].removeEventListener("click", this.BottomRight)
+                        document.getElementsByClassName("target")[0].children[0].removeEventListener("click", this.TopLeft)
+                        document.getElementsByClassName("target")[0].children[0].removeEventListener("click", this.TopRight)
                         document.getElementsByClassName("target")[0].classList.remove("target");
                     }
                 }
@@ -108,7 +107,7 @@ class dam extends stone {
             var selected = document.getElementsByClassName("selected");
             if (selected.length != 0) {
                 for (let i = 0; i <= selected.length; i++) {
-                    selected[0].addEventListener("click", main.piece.attackCheck)
+                    selected[0].addEventListener("click", this.attackCheck)
                     selected[0].parentElement.classList.add("possible-attack")
                     selected[0].classList.remove("selected");
                 }
@@ -123,8 +122,8 @@ class dam extends stone {
         let boolupleft = true;
         let boolupright = true;
         let counterPosible = 0;
-        if (!main.piece._possible) {
-            if (main.piece._turn == "Black") {
+        if (!this._possible) {
+            if (this._turn == "Black") {
                 if (event.target.classList.contains("dam")) {
                     const cell = event.target.closest('td');
                     if (!cell) { return; }
@@ -140,10 +139,10 @@ class dam extends stone {
                     var targets = document.getElementsByClassName("occupied");
                     if (targets.length != 0) {
                         for (let i = 0; i < targets.length; i++) {
-                            targets[i].removeEventListener("click", main.piece.BottomLeft)
-                            targets[i].removeEventListener("click", main.piece.BottomRight)
-                            targets[i].removeEventListener("click", main.piece.TopLeft)
-                            targets[i].removeEventListener("click", main.piece.TopRight)
+                            targets[i].removeEventListener("click", this.BottomLeft)
+                            targets[i].removeEventListener("click", this.BottomRight)
+                            targets[i].removeEventListener("click", this.TopLeft)
+                            targets[i].removeEventListener("click", this.TopRight)
                         }
                     }
 
@@ -151,7 +150,7 @@ class dam extends stone {
                     let x = possibleSquares.length;
                     if (possibleSquares.length != 0) {
                         for (let i = 0; i < x; i++) {
-                            possibleSquares[0].removeEventListener("click", main.piece.move);
+                            possibleSquares[0].removeEventListener("click", this.move);
                             possibleSquares[0].classList.remove("possible");
                         }
                     }
@@ -161,44 +160,44 @@ class dam extends stone {
                     if (targetSquares.length != 0) {
                         for (let i = 0; i < y; i++) {
                             targetSquares[0].classList.remove("target");
-                            targetSquares[0].removeEventListener("click", main.piece.move);
+                            targetSquares[0].removeEventListener("click", this.move);
                             targetSquares[0].classList.remove("possible");
                         }
                     }
 
-                    for (let i = 0; i < main.rowList.length; i++) {
-                        if (main.rowList[row.rowIndex + i] != null) {
-                            cellList = main.rowList[row.rowIndex + i].cells;
+                    for (let i = 0; i < rowList.length; i++) {
+                        if (rowList[row.rowIndex + i] != null) {
+                            cellList = rowList[row.rowIndex + i].cells;
                             if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
                                 if (counterPosible <= 2 && cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")) {
                                     boolupleft = false;
                                     let piece = cellList[cell.cellIndex - i];
                                     piece.classList.add("possible-attack")
-                                    piece.addEventListener("click", main.dam_piece.TopLeft)
+                                    piece.addEventListener("click", this.TopLeft)
                                     counterPosible++;
                                 }
                                 if (boolupleft && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex - i].classList.add("possible")
-                                    cellList[cell.cellIndex - i].addEventListener("click", main.piece.move)
+                                    cellList[cell.cellIndex - i].addEventListener("click", this.move)
                                 }
 
                                 if (cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     boolupleft = false
                                 }
                             }
-                            cellList = main.rowList[row.rowIndex + i].cells;
+                            cellList = rowList[row.rowIndex + i].cells;
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
                                 if (counterPosible <= 2 && cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("White-Piece")) {
                                     boolupright = false;
                                     cellList[cell.cellIndex + i].classList.add("possible-attack")
-                                    cellList[cell.cellIndex + i].addEventListener("click", main.dam_piece.TopRight)
+                                    cellList[cell.cellIndex + i].addEventListener("click", this.TopRight)
                                     counterPosible++;
                                 }
                                 if (boolupright && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex + i].classList.add("possible")
-                                    cellList[cell.cellIndex + i].addEventListener("click", main.dam_piece.move)
+                                    cellList[cell.cellIndex + i].addEventListener("click", this.move)
                                 }
 
                                 if (cellList[cell.cellIndex - i].classList.contains("occupied")) {
@@ -206,37 +205,37 @@ class dam extends stone {
                                 }
                             }
                         }
-                        if (main.rowList[row.rowIndex - i] != null) {
-                            cellList = main.rowList[row.rowIndex - i].cells;
+                        if (rowList[row.rowIndex - i] != null) {
+                            cellList = rowList[row.rowIndex - i].cells;
                             if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
                                 if (counterPosible <= 2 && cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")) {
                                     booldownright = false;
                                     cellList[cell.cellIndex - i].classList.add("possible-attack")
-                                    cellList[cell.cellIndex - i].addEventListener("click", main.dam_piece.BottomLeft)
+                                    cellList[cell.cellIndex - i].addEventListener("click", this.BottomLeft)
                                     counterPosible++;
                                 }
                                 if (booldownright && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex - i].classList.add("possible")
-                                    cellList[cell.cellIndex - i].addEventListener("click", main.dam_piece.move)
+                                    cellList[cell.cellIndex - i].addEventListener("click", this.move)
                                 }
 
                                 if (cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     booldownright = false
                                 }
                             }
-                            cellList = main.rowList[row.rowIndex - i].cells;
+                            cellList = rowList[row.rowIndex - i].cells;
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
                                 if (counterPosible <= 2 && cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("White-Piece")) {
                                     booldownleft = false;
                                     cellList[cell.cellIndex + i].classList.add("possible-attack")
-                                    cellList[cell.cellIndex + i].addEventListener("click", main.dam_piece.BottomRight)
+                                    cellList[cell.cellIndex + i].addEventListener("click", this.BottomRight)
                                     counterPosible++;
                                 }
                                 if (booldownleft && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex + i].classList.add("possible")
-                                    cellList[cell.cellIndex + i].addEventListener("click", main.dam_piece.move)
+                                    cellList[cell.cellIndex + i].addEventListener("click", this.move)
                                 }
 
                                 if (cellList[cell.cellIndex - i].classList.contains("occupied")) {
@@ -257,8 +256,8 @@ class dam extends stone {
         let booldownright = true;
         let boolupleft = true;
         let boolupright = true;
-        if (!main.piece._possible) {
-            if (main.piece._turn == "White") {
+        if (!this._possible) {
+            if (this._turn == "White") {
                 if (event.target.classList.contains("dam")) {
                     const cell = event.target.closest('td');
                     if (!cell) { return; }
@@ -274,10 +273,10 @@ class dam extends stone {
                     var targets = document.getElementsByClassName("occupied");
                     if (targets.length != 0) {
                         for (let i = 0; i < targets.length; i++) {
-                            targets[i].removeEventListener("click", main.piece.BottomLeft)
-                            targets[i].removeEventListener("click", main.piece.BottomRight)
-                            targets[i].removeEventListener("click", main.piece.TopLeft)
-                            targets[i].removeEventListener("click", main.piece.TopRight)
+                            targets[i].removeEventListener("click", this.BottomLeft)
+                            targets[i].removeEventListener("click", this.BottomRight)
+                            targets[i].removeEventListener("click", this.TopLeft)
+                            targets[i].removeEventListener("click", this.TopRight)
                         }
                     }
 
@@ -285,7 +284,7 @@ class dam extends stone {
                     let x = possibleSquares.length;
                     if (possibleSquares.length != 0) {
                         for (let i = 0; i < x; i++) {
-                            possibleSquares[0].removeEventListener("click", main.piece.move);
+                            possibleSquares[0].removeEventListener("click", this.move);
                             possibleSquares[0].classList.remove("possible");
                         }
                     }
@@ -295,14 +294,14 @@ class dam extends stone {
                     if (targetSquares.length != 0) {
                         for (let i = 0; i < y; i++) {
                             targetSquares[0].classList.remove("target");
-                            targetSquares[0].removeEventListener("click", main.piece.move);
+                            targetSquares[0].removeEventListener("click", this.move);
                             targetSquares[0].classList.remove("possible");
                         }
                     }
 
-                    for (let i = 0; i < main.rowList.length; i++) {
-                        if (main.rowList[row.rowIndex - i] != null) {
-                            cellList = main.rowList[row.rowIndex - i].cells;
+                    for (let i = 0; i < rowList.length; i++) {
+                        if (rowList[row.rowIndex - i] != null) {
+                            cellList = rowList[row.rowIndex - i].cells;
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
                                 if (cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("Black-Piece")) {
@@ -310,14 +309,14 @@ class dam extends stone {
                                 }
                                 if (booldownleft && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex + i].classList.add("possible")
-                                    cellList[cell.cellIndex + i].addEventListener("click", main.piece.move)
+                                    cellList[cell.cellIndex + i].addEventListener("click", this.move)
                                 }
 
                                 if (cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     booldownleft = false
                                 }
                             }
-                            cellList = main.rowList[row.rowIndex - i].cells;
+                            cellList = rowList[row.rowIndex - i].cells;
                             if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
                                 if (cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("Black-Piece")) {
@@ -325,7 +324,7 @@ class dam extends stone {
                                 }
                                 if (booldownright && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex - i].classList.add("possible")
-                                    cellList[cell.cellIndex - i].addEventListener("click", main.piece.move)
+                                    cellList[cell.cellIndex - i].addEventListener("click", this.move)
                                 }
 
                                 if (cellList[cell.cellIndex - i].classList.contains("occupied")) {
@@ -333,8 +332,8 @@ class dam extends stone {
                                 }
                             }
                         }
-                        if (main.rowList[row.rowIndex + i] != null) {
-                            cellList = main.rowList[row.rowIndex + i].cells;
+                        if (rowList[row.rowIndex + i] != null) {
+                            cellList = rowList[row.rowIndex + i].cells;
                             if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
                                 if (cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("Black-Piece")) {
@@ -342,14 +341,14 @@ class dam extends stone {
                                 }
                                 if (boolupleft && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex + i].classList.add("possible")
-                                    cellList[cell.cellIndex + i].addEventListener("click", main.piece.move)
+                                    cellList[cell.cellIndex + i].addEventListener("click", this.move)
                                 }
 
                                 if (cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     boolupleft = false
                                 }
                             }
-                            cellList = main.rowList[row.rowIndex + i].cells;
+                            cellList = rowList[row.rowIndex + i].cells;
                             if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
                             } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
                                 if (cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("Black-P iece")) {
@@ -357,7 +356,7 @@ class dam extends stone {
                                 }
                                 if (boolupright && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
                                     cellList[cell.cellIndex - i].classList.add("possible")
-                                    cellList[cell.cellIndex - i].addEventListener("click", main.piece.move)
+                                    cellList[cell.cellIndex - i].addEventListener("click", this.move)
                                 }
 
                                 if (cellList[cell.cellIndex - i].classList.contains("occupied")) {
@@ -372,3 +371,7 @@ class dam extends stone {
         }
     }
 }
+
+customElements.define("dam-dam", dam , { extends: 'img' })
+
+// export { dam }
