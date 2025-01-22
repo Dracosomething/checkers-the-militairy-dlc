@@ -1,6 +1,3 @@
-// import * as main from "./script.js";
-// import { dam } from "./dam.js";
-
 var turn;
 // var cellList;
 // all normal pieces
@@ -39,7 +36,6 @@ class stone extends HTMLImageElement {
 
     // runs when we assign a new value to turn, used for everything needed to happen when a turn ends
     set _turn(side) {
-        console.log(side)
         turn = side
         var selected = document.getElementsByClassName("selected");
         if (selected.length != 0) {
@@ -80,9 +76,9 @@ class stone extends HTMLImageElement {
                 for (let j = 0; j < WhitePieces.length; j++) {
                     let stone = WhitePieces[j];
                     if (stone.parentElement != null && stone.parentElement.parentElement != null && stone.parentElement.parentElement.id == "end-black" && !stone.classList.contains("dam")) {
-                        console.log(stone + " can evolve")
                         let new_dam = new dam();
-                        new_dam.classList.add("dam White-Piece")
+                        new_dam.classList.add("dam")
+                        new_dam.classList.add("White-Piece");
                         new_dam.src = 'assets/dam_white.png';
                         new_dam.addEventListener("click", new_dam.setUpWhite)
                         stone.parentElement.appendChild(new_dam)
@@ -91,8 +87,6 @@ class stone extends HTMLImageElement {
                 }
                 for (let j = 0; j < BlackPieces.length; j++) {
                     let piece = BlackPieces[j]
-                    // console.log(stone)
-                    // console.log(stone.parentElement)
                     if (piece instanceof stone) {
                         piece.parentElement.removeEventListener("click", piece.BottomLeft)
                         piece.parentElement.removeEventListener("click", piece.BottomRight)
@@ -110,16 +104,16 @@ class stone extends HTMLImageElement {
                 }
                 for (let j = 0; j < BlackPieces.length; j++) {
                     let stone = BlackPieces[j]
-                    game.forceAttack(stone, "White")
+                    this.forceAttack(stone, "White", 1)
                 }
                 break
             case "White":
                 for (let j = 0; j < BlackPieces.length; j++) {
                     let stone = BlackPieces[j];
                     if (stone.parentElement != null && stone.parentElement.parentElement != null && stone.parentElement.parentElement.id == "end-white" && !stone.classList.contains("dam")) {
-                        console.log(stone + " can evolve")
                         let new_dam = new dam();
-                        new_dam.classList.add("dam Black-Piece")
+                        new_dam.classList.add("dam")
+                        new_dam.classList.add("Black-Piece")
                         new_dam.src = 'assets/dam_black.png';
                         new_dam.addEventListener("click", new_dam.setUpBlack)
                         stone.parentElement.appendChild(new_dam)
@@ -128,8 +122,6 @@ class stone extends HTMLImageElement {
                 }
                 for (let j = 0; j < WhitePieces.length; j++) {
                     let piece = BlackPieces[j]
-                    // console.log(stone)
-                    // console.log(stone.parentElement)
                     if (piece instanceof stone) {
                         piece.parentElement.removeEventListener("click", piece.BottomLeft)
                         piece.parentElement.removeEventListener("click", piece.BottomRight)
@@ -147,7 +139,7 @@ class stone extends HTMLImageElement {
                 }
                 for (let j = 0; j < WhitePieces.length; j++) {
                     let stone = WhitePieces[j]
-                    game.forceAttack(stone, "Black")
+                    this.forceAttack(stone, "Black", 1)
                 }
                 break
         }
@@ -161,8 +153,8 @@ class stone extends HTMLImageElement {
         } else {
             document.getElementsByClassName("selected")[0].classList.remove("occupied")
         }
-        event.target.appendChild(document.getElementsByClassName("selected")[0])
-        event.target.classList.add("occupied")
+        this.appendChild(document.getElementsByClassName("selected")[0])
+        this.classList.add("occupied")
         var possibleSquares = document.getElementsByClassName("possible");
         let x = possibleSquares.length;
         if (possibleSquares.length != 0) {
@@ -172,7 +164,6 @@ class stone extends HTMLImageElement {
                 possibleSquares[0].classList.remove("possible");
             }
         }
-        console.log(this.children[0])
         game._turn = game._turn == "Black" ? "White" : "Black"
         player.children[0].innerHTML = game._turn
     }
@@ -193,6 +184,7 @@ class stone extends HTMLImageElement {
                     possibleSquares[0].children[0].removeEventListener("click", possibleSquares[0].children[0].BottomRight)
                     possibleSquares[0].children[0].removeEventListener("click", possibleSquares[0].children[0].TopLeft)
                     possibleSquares[0].children[0].removeEventListener("click", possibleSquares[0].children[0].TopRight)
+                    possibleSquares[0].children[0].removeEventListener("click", possibleSquares[0].children[0].attackCheck)
                 }
                 possibleSquares[0].classList.remove("possible");
             }
@@ -223,39 +215,35 @@ class stone extends HTMLImageElement {
 
     // allows for event listeners to be used properly
     TopLeft(event) {
-        let target = event.target
-        const cell = target.closest("td")
+        const cell = this.closest("td")
         if (!cell) { return; }
         const row = cell.parentElement;
         let newSquare = rowList[row.rowIndex + 1].cells[cell.cellIndex - 1]
-        this.attack(target, newSquare)
+        this.attack(this, newSquare)
     }
 
     TopRight(event) {
-        let target = event.target
-        const cell = target.closest("td")
+        const cell = this.closest("td")
         if (!cell) { return; }
         const row = cell.parentElement;
         let newSquare = rowList[row.rowIndex + 1].cells[cell.cellIndex + 1]
-        this.attack(target, newSquare)
+        this.attack(this, newSquare)
     }
 
     BottomRight(event) {
-        let target = event.target
-        const cell = target.closest("td")
+        const cell = this.closest("td")
         if (!cell) { return; }
         const row = cell.parentElement;
         let newSquare = rowList[row.rowIndex - 1].cells[cell.cellIndex + 1]
-        this.attack(target, newSquare)
+        this.attack(this, newSquare)
     }
 
     BottomLeft(event) {
-        let target = event.target
-        const cell = target.closest("td")
+        const cell = this.closest("td")
         if (!cell) { return; }
         const row = cell.parentElement;
         let newSquare = rowList[row.rowIndex - 1].cells[cell.cellIndex - 1]
-        this.attack(target, newSquare)
+        this.attack(this, newSquare)
     }
 
     // optional attacking
@@ -280,12 +268,11 @@ class stone extends HTMLImageElement {
                 selected[0].classList.remove("selected");
             }
         }
-        let piece = event.target
+        let piece = this
         let opposing = game._turn;
         const cell = piece.closest('td');
         if (!cell) { return; }
         const row = cell.parentElement;
-        console.log("ëwrwer")
 
         if (rowList[row.rowIndex + 1] != null) {
             cellList = rowList[row.rowIndex + 1].cells;
@@ -346,36 +333,44 @@ class stone extends HTMLImageElement {
     }
 
     // checks for attack possibilities
-    forceAttack(stone, opposing) {
+    forceAttack(stone, opposing, i) {
         const cell = stone.closest('td');
         if (!cell) { return; }
         const row = cell.parentElement;
         let bool = false;
 
-        if (rowList[row.rowIndex + 1] != null) {
-            cellList = rowList[row.rowIndex + 1].cells;
-            if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 2] != null && rowList[row.rowIndex + 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
-                cellList = rowList[row.rowIndex + 2].cells;
-                if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
-                    cellList = rowList[row.rowIndex + 1].cells
-                    cellList[cell.cellIndex - 1].children[0].addEventListener("click", this.TopLeft)
-                    cellList[cell.cellIndex - 1].classList.add("target")
-                    cellList[cell.cellIndex - 1].classList.add("possible")
+        if (rowList[row.rowIndex + i] != null) {
+            cellList = rowList[row.rowIndex + i].cells;
+            if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
+            } else if (cellList[cell.cellIndex - i - 1] != null &&
+                rowList[row.rowIndex + i + 1] != null &&
+                cellList[cell.cellIndex - i].classList.contains("white") &&
+                cellList[cell.cellIndex - i].classList.contains("occupied") &&
+                cellList[cell.cellIndex - i].children[0].classList.contains(opposing + "-Piece")) {
+                cellList = rowList[row.rowIndex + i + 1].cells;
+                if (!cellList[cell.cellIndex - i - 1].classList.contains("occupied")) {
+                    cellList = rowList[row.rowIndex + i].cells
+                    cellList[cell.cellIndex - i].children[0].addEventListener("click", this.TopLeft)
+                    cellList[cell.cellIndex - i].classList.add("target")
+                    cellList[cell.cellIndex - i].classList.add("possible")
                     stone.classList.add("selected")
                     game._possible = true
                     bool = true;
                 }
             }
-            cellList = rowList[row.rowIndex + 1].cells;
-            if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 2] != null && rowList[row.rowIndex + 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
-                cellList = rowList[row.rowIndex + 2].cells;
-                if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
-                    cellList = rowList[row.rowIndex + 1].cells;
-                    cellList[cell.cellIndex + 1].children[0].addEventListener("click", this.TopRight)
-                    cellList[cell.cellIndex + 1].classList.add("target")
-                    cellList[cell.cellIndex + 1].classList.add("possible")
+            cellList = rowList[row.rowIndex + i].cells;
+            if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
+            } else if (cellList[cell.cellIndex + i + 1] != null &&
+                rowList[row.rowIndex + i + 1] != null &&
+                cellList[cell.cellIndex + i].classList.contains("white") &&
+                cellList[cell.cellIndex + i].classList.contains("occupied") &&
+                cellList[cell.cellIndex + i].children[0].classList.contains(opposing + "-Piece")) {
+                cellList = rowList[row.rowIndex + i + 1].cells;
+                if (!cellList[cell.cellIndex + i + 1].classList.contains("occupied")) {
+                    cellList = rowList[row.rowIndex + i].cells;
+                    cellList[cell.cellIndex + i].children[0].addEventListener("click", this.TopRight)
+                    cellList[cell.cellIndex + i].classList.add("target")
+                    cellList[cell.cellIndex + i].classList.add("possible")
                     stone.classList.add("selected")
                     game._possible = true
                     bool = true;
@@ -453,7 +448,7 @@ class stone extends HTMLImageElement {
     setUpBlack(event) {
         if (!game._possible) {
             if (game._turn == "Black") {
-                const cell = event.target.closest('td');
+                const cell = this.closest('td');
                 if (!cell) { return; }
                 const row = cell.parentElement;
 
@@ -514,7 +509,7 @@ class stone extends HTMLImageElement {
                         }
                     }
                 }
-                event.target.classList.add("selected")
+                this.classList.add("selected")
             }
         }
     }
@@ -523,7 +518,7 @@ class stone extends HTMLImageElement {
     setUpWhite(event) {
         if (!game._possible) {
             if (game._turn == "White") {
-                const cell = event.target.closest('td');
+                const cell = this.closest('td');
                 if (!cell) { return; }
                 const row = cell.parentElement;
 
@@ -573,7 +568,6 @@ class stone extends HTMLImageElement {
                     } else if (cellList[cell.cellIndex] != null && cellList[cell.cellIndex].classList.contains("white")) {
                         if (!cellList[cell.cellIndex].classList.contains("occupied")) {
                             cellList[cell.cellIndex].classList.add("possible")
-                            console.log(this)
                             cellList[cell.cellIndex].addEventListener("click", this.move)
                         }
                     }
@@ -581,8 +575,6 @@ class stone extends HTMLImageElement {
                     } else if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("white")) {
                         if (!cellList[cell.cellIndex + 1].classList.contains("occupied")) {
                             cellList[cell.cellIndex + 1].classList.add("possible")
-                            console.log(this)
-                            console.log(cellList[cell.cellIndex + 1])
                             cellList[cell.cellIndex + 1].addEventListener("click", this.move)
                         }
                     }
@@ -591,19 +583,14 @@ class stone extends HTMLImageElement {
                     } else if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("white")) {
                         if (!cellList[cell.cellIndex - 1].classList.contains("occupied")) {
                             cellList[cell.cellIndex - 1].classList.add("possible")
-                            console.log(this)
                             cellList[cell.cellIndex - 1].addEventListener("click", this.move)
                         }
                     }
                 }
-                event.target.classList.add("selected")
+                this.classList.add("selected")
             }
         }
     }
 }
 
 customElements.define("dam-stone", stone, { extends: 'img' })
-
-console.log("initilized")
-
-// export { stone }
