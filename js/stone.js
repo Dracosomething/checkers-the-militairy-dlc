@@ -40,6 +40,9 @@ class stone extends HTMLImageElement {
         var selected = document.getElementsByClassName("selected");
         if (selected.length != 0) {
             for (let i = 0; i <= selected.length; i++) {
+                if(selected[0] instanceof stone) {
+                    selected[0].removeEventListener("click", selected[0].attackCheck);
+                }
                 selected[0].classList.remove("selected");
             }
         }
@@ -57,6 +60,9 @@ class stone extends HTMLImageElement {
         let y = targetSquares.length;
         if (targetSquares.length != 0) {
             for (let i = 0; i < y; i++) {
+                if(targetSquares[0].children[0] instanceof stone) {
+                    targetSquares[0].children[0].removeEventListener("click", targetSquares[0].children[0].attackCheck);
+                }
                 targetSquares[0].classList.remove("possible-attack");
             }
         }
@@ -106,6 +112,12 @@ class stone extends HTMLImageElement {
                     let stone = BlackPieces[j]
                     this.forceAttack(stone, "White", 1)
                 }
+                for (let j = 0; j < BlackDam.length; j++) {
+                    let dam_piece = BlackDam[j];
+                    if (dam_piece instanceof dam) {
+                        dam_piece.forceAttack(dam_piece, "White", null)
+                    }
+                }
                 break
             case "White":
                 for (let j = 0; j < BlackPieces.length; j++) {
@@ -140,6 +152,12 @@ class stone extends HTMLImageElement {
                 for (let j = 0; j < WhitePieces.length; j++) {
                     let stone = WhitePieces[j]
                     this.forceAttack(stone, "Black", 1)
+                }
+                for (let j = 0; j < WhiteDam.length; j++) {
+                    let dam_piece = WhiteDam[j];
+                    if (dam_piece instanceof dam) {
+                        dam_piece.forceAttack(dam_piece, "Black", null)
+                    }
                 }
                 break
         }
@@ -205,7 +223,7 @@ class stone extends HTMLImageElement {
         }
         game.kill_counter += 1;
         // this.forceAttack(document.getElementsByClassName("selected")[0], turn == "Black" ? "White" : "Black")
-        if (game._possible && this.forceAttack(document.getElementsByClassName("selected")[0], turn == "Black" ? "White" : "Black")) {
+        if (game._possible && this.forceAttack(document.getElementsByClassName("selected")[0], turn == "Black" ? "White" : "Black", 1)) {
             game._possible = !game.possible
         } else {
             game._turn = turn == "Black" ? "White" : "Black"
@@ -377,37 +395,46 @@ class stone extends HTMLImageElement {
                 }
             }
         }
-        if (rowList[row.rowIndex - 1] != null) {
-            cellList = rowList[row.rowIndex - 1].cells;
-            if (cellList[cell.cellIndex - 1] != null && cellList[cell.cellIndex - 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex - 2] != null && rowList[row.rowIndex - 2] != null && cellList[cell.cellIndex - 1].classList.contains("white") && cellList[cell.cellIndex - 1].classList.contains("occupied") && cellList[cell.cellIndex - 1].children[0].classList.contains(opposing + "-Piece")) {
-                cellList = rowList[row.rowIndex - 2].cells;
-                if (!cellList[cell.cellIndex - 2].classList.contains("occupied")) {
-                    cellList = rowList[row.rowIndex - 1].cells;
-                    cellList[cell.cellIndex - 1].children[0].addEventListener("click", this.BottomLeft)
-                    cellList[cell.cellIndex - 1].classList.add("target")
-                    cellList[cell.cellIndex - 1].classList.add("possible")
+        if (rowList[row.rowIndex - i] != null) {
+            cellList = rowList[row.rowIndex - i].cells;
+            if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
+            } else if (cellList[cell.cellIndex - i - 1] != null &&
+                rowList[row.rowIndex - i - 1] != null &&
+                cellList[cell.cellIndex - i].classList.contains("white") &&
+                cellList[cell.cellIndex - i].classList.contains("occupied") &&
+                cellList[cell.cellIndex - i].children[0].classList.contains(opposing + "-Piece")) {
+                cellList = rowList[row.rowIndex - i - 1].cells;
+                if (!cellList[cell.cellIndex - i - 1].classList.contains("occupied")) {
+                    cellList = rowList[row.rowIndex - i].cells;
+                    cellList[cell.cellIndex - i].children[0].addEventListener("click", this.BottomLeft)
+                    cellList[cell.cellIndex - i].classList.add("target")
+                    cellList[cell.cellIndex - i].classList.add("possible")
                     stone.classList.add("selected")
                     game._possible = true
                     bool = true
                 }
             }
-            cellList = rowList[row.rowIndex - 1].cells;
-            if (cellList[cell.cellIndex + 1] != null && cellList[cell.cellIndex + 1].classList.contains("black")) {
-            } else if (cellList[cell.cellIndex + 2] != null && rowList[row.rowIndex - 2] != null && cellList[cell.cellIndex + 1].classList.contains("white") && cellList[cell.cellIndex + 1].classList.contains("occupied") && cellList[cell.cellIndex + 1].children[0].classList.contains(opposing + "-Piece")) {
-                cellList = rowList[row.rowIndex - 2].cells;
-                if (!cellList[cell.cellIndex + 2].classList.contains("occupied")) {
-                    cellList = rowList[row.rowIndex - 1].cells;
-                    cellList[cell.cellIndex + 1].children[0].addEventListener("click", this.BottomRight)
-                    cellList[cell.cellIndex + 1].classList.add("target")
-                    cellList[cell.cellIndex + 1].classList.add("possible")
+            cellList = rowList[row.rowIndex - i].cells;
+            if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
+            } else if (cellList[cell.cellIndex + i + 1] != null &&
+                rowList[row.rowIndex - i - 1] != null &&
+                cellList[cell.cellIndex + i].classList.contains("white") &&
+                cellList[cell.cellIndex + i].classList.contains("occupied") &&
+                cellList[cell.cellIndex + i].children[0].classList.contains(opposing + "-Piece")) {
+                cellList = rowList[row.rowIndex - i - 1].cells;
+                if (!cellList[cell.cellIndex + i + 1].classList.contains("occupied")) {
+                    cellList = rowList[row.rowIndex - i].cells;
+                    cellList[cell.cellIndex + i].children[0].addEventListener("click", this.BottomRight)
+                    cellList[cell.cellIndex + i].classList.add("target")
+                    cellList[cell.cellIndex + i].classList.add("possible")
                     stone.classList.add("selected")
                     game._possible = true
                     bool = true
                 }
             }
         }
-        if (document.getElementsByClassName("selected") != null && document.getElementsByClassName("selected").length > 1) {
+        if (document.getElementsByClassName("selected") != null &&
+            document.getElementsByClassName("selected").length > 1) {
             var possibleSquares = document.getElementsByClassName("possible");
             let x = possibleSquares.length;
             if (possibleSquares.length != 0) {

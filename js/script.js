@@ -1,6 +1,3 @@
-// import { stone } from "./_stone.js"
-// import { dam } from "./dam.js"
-
 // start positions
 var whitePieces = document.getElementsByClassName("startposWhite")
 var blackPieces = document.getElementsByClassName("startposBlack")
@@ -22,14 +19,9 @@ const rowList = document.querySelectorAll("table tr")
 // empty variables;
 var cellList;
 var target;
-var win;
 
 // create classes
 const game = new stone();
-// const dam_piece = new dam();
-
-// the previous turn
-// var oldturn = piece._turn
 
 generateButton.addEventListener("click", generateField)
 
@@ -59,19 +51,13 @@ function generateField() {
         blackPiece.classList.add("occupied")
     }
     // randomly assign a first turn
-    piece._turn = Math.floor(Math.random() * 10) + 1 >= 5 ? "White" : "Black"
+    game._turn = Math.floor(Math.random() * 10) + 1 >= 5 ? "White" : "Black"
     // set it so pieces can move
     piece._possible = false;
     // show the turn in the website
-    player.children[0].innerHTML = piece._turn
+    player.children[0].innerHTML = game._turn
     // disable the button
     generateButton.setAttribute('disabled', 'false');
-}
-
-
-function getTarget(index) {
-    target = index;
-    return target;
 }
 
 // win alert
@@ -100,5 +86,3 @@ function alertWin(color) {
         }
     }
 }
-
-// export { rowList, piece, dam_piece, player, win, scoreBlack, scoreWhite, alertWin }
