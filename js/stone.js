@@ -109,13 +109,14 @@ class stone extends HTMLImageElement {
                         piece.removeEventListener("click", piece.attackCheck)
                 }
                 for (let j = 0; j < BlackPieces.length; j++) {
-                    let stone = BlackPieces[j]
-                    this.forceAttack(stone, "White", 1)
+                    let dam_stone = BlackPieces[j]
+                    if(dam_stone instanceof stone)
+                        dam_stone.forceAttack(dam_stone, "White", 1)
                 }
                 for (let j = 0; j < BlackDam.length; j++) {
                     let dam_piece = BlackDam[j];
                     if (dam_piece instanceof dam) {
-                        dam_piece.forceAttack(dam_piece, "White", null)
+                        dam_piece.forceAttack(dam_piece, "White")
                     }
                 }
                 break
@@ -145,18 +146,19 @@ class stone extends HTMLImageElement {
                     alertWin("black")
                 }
                 for (let j = 0; j < BlackPieces.length; j++) {
-                    let piece = WhitePieces[j]
+                    let piece = BlackPieces[j]
                     if (piece instanceof stone)
                         piece.removeEventListener("click", piece.attackCheck)
                 }
                 for (let j = 0; j < WhitePieces.length; j++) {
-                    let stone = WhitePieces[j]
-                    this.forceAttack(stone, "Black", 1)
+                    let dam_stone = WhitePieces[j]
+                    if(dam_stone instanceof stone)
+                        dam_stone.forceAttack(dam_stone, "Black", 1)
                 }
                 for (let j = 0; j < WhiteDam.length; j++) {
                     let dam_piece = WhiteDam[j];
                     if (dam_piece instanceof dam) {
-                        dam_piece.forceAttack(dam_piece, "Black", null)
+                        dam_piece.forceAttack(dam_piece, "Black")
                     }
                 }
                 break

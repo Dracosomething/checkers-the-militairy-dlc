@@ -21,7 +21,7 @@ var cellList;
 var target;
 
 // create classes
-const game = new stone();
+const game = new stone()
 
 generateButton.addEventListener("click", generateField)
 
