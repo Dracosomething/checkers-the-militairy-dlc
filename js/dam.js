@@ -3,10 +3,22 @@ class dam extends stone {
         super()
     }
 
+    killCounter = 0;
+
+    set _turn(side) {
+        console.log(side)
+        super._turn = side;
+        console.log(game)
+        console.log(game.turn)
+        for (let i = 0; i < BlackDam.length; i++) {
+            console.log(BlackDam[0].killCounter)
+        }
+    }
+
     forceAttack(stone, opposing) {
         let bool = false;
         for(let x = 0; x < rowList.length; x++) {
-            console.log(x)
+            // console.log(x)
             bool = super.forceAttack(stone, opposing, x);
         }
         return bool;
@@ -14,6 +26,7 @@ class dam extends stone {
 
     attack(target, newSquare) {
         super.attack(target, newSquare);
+        this.killCounter++
     }
 
     // black dam movement code
@@ -24,7 +37,7 @@ class dam extends stone {
         let boolupright = true;
         let counterPosible = 0;
         if (!game._possible) {
-            if (game._turn == "Black") {
+            if (game.turn == "Black") {
                 if (this.classList.contains("dam")) {
                     const cell = this.closest('td');
                     if (!cell) { return; }
@@ -67,86 +80,143 @@ class dam extends stone {
                     }
 
                     for (let i = 0; i < rowList.length; i++) {
-                        if(counterPosible < 2){
                             if (rowList[row.rowIndex + i] != null) {
                                 cellList = rowList[row.rowIndex + i].cells;
-                                if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
-                                } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
-                                    if (counterPosible <= 2 && cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")) {
-                                        boolupleft = false;
-                                        let piece = cellList[cell.cellIndex - i];
-                                        piece.classList.add("possible-attack")
-                                        piece.addEventListener("click", this.TopLeft)
-                                        counterPosible++;
-                                    }
-                                    if (boolupleft && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
-                                        cellList[cell.cellIndex - i].classList.add("possible")
-                                        cellList[cell.cellIndex - i].addEventListener("click", this.move)
-                                    }
-
-                                    if (cellList[cell.cellIndex - i].classList.contains("occupied Black-Piece")) {
-                                        boolupleft = false
+                                if(boolupleft) {
+                                    if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
+                                    } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
+                                        if (cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")) {
+                                            let piece;
+                                            cellList = rowList[row.rowIndex + i + 1].cells;
+                                            if (cellList[cell.cellIndex - i - 1].children[0] != null && cellList[cell.cellIndex - i - 1].children[0].classList.contains("White-Piece")) {
+                                                cellList = rowList[row.rowIndex + i + 2].cells;
+                                                if (cellList[cell.cellIndex - i - 2].children[0] != null && cellList[cell.cellIndex - i - 2].children[0].classList.contains("White-Piece")) {
+                                                    boolupleft = false;
+                                                    return;
+                                                } else {
+                                                    cellList = rowList[row.rowIndex - i].cells;
+                                                    piece = cellList[cell.cellIndex - i].children[0];
+                                                    piece.classList.add("target");
+                                                    cellList = rowList[row.rowIndex - i - 1].cells;
+                                                    piece = cellList[cell.cellIndex - i - 1].children[0];
+                                                    piece.classList.add("target");
+                                                    piece.classList.add("possible-attack")
+                                                    piece.addEventListener("click", this.TopLeft)
+                                                }
+                                            }
+                                        }
+                                        if (!cellList[cell.cellIndex - i].classList.contains("occupied")) {
+                                            cellList[cell.cellIndex - i].classList.add("possible")
+                                            cellList[cell.cellIndex - i].addEventListener("click", this.move)
+                                        }
+                                        if (cellList[cell.cellIndex - i].classList.contains("occupied Black-Piece")) {
+                                            boolupleft = false
+                                        }
                                     }
                                 }
                                 cellList = rowList[row.rowIndex + i].cells;
-                                if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
-                                } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
-                                    if (counterPosible <= 2 && cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("White-Piece")) {
-                                        boolupright = false;
-                                        cellList[cell.cellIndex + i].classList.add("possible-attack")
-                                        cellList[cell.cellIndex + i].addEventListener("click", this.TopRight)
-                                        counterPosible++;
-                                    }
-                                    if (boolupright && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
-                                        cellList[cell.cellIndex + i].classList.add("possible")
-                                        cellList[cell.cellIndex + i].addEventListener("click", this.move)
-                                    }
-
-                                    if (cellList[cell.cellIndex - i].classList.contains("occupied Black-Piece")) {
-                                        boolupright = false
+                                if(boolupright) {
+                                    if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
+                                    } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
+                                        if (cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("White-Piece")) {
+                                            let piece;
+                                            cellList = rowList[row.rowIndex + i + 1].cells;
+                                            if (cellList[cell.cellIndex + i + 1].children[0] != null && cellList[cell.cellIndex + i + 1].children[0].classList.contains("White-Piece")) {
+                                                cellList = rowList[row.rowIndex + i + 2].cells;
+                                                if (cellList[cell.cellIndex + i + 2].children[0] != null && cellList[cell.cellIndex + i + 2].children[0].classList.contains("White-Piece")) {
+                                                    boolupright = false;
+                                                    return;
+                                                } else {
+                                                    cellList = rowList[row.rowIndex + i].cells;
+                                                    piece = cellList[cell.cellIndex + i].children[0];
+                                                    piece.classList.add("target");
+                                                    cellList = rowList[row.rowIndex + i + 1].cells;
+                                                    piece = cellList[cell.cellIndex + i + 1].children[0];
+                                                    piece.classList.add("target");
+                                                    piece.classList.add("possible-attack")
+                                                    piece.addEventListener("click", this.TopLeft)
+                                                }
+                                            }
+                                        }
+                                        if (!cellList[cell.cellIndex + i].classList.contains("occupied")) {
+                                            cellList[cell.cellIndex + i].classList.add("possible")
+                                            cellList[cell.cellIndex + i].addEventListener("click", this.move)
+                                        }
+                                        if (cellList[cell.cellIndex - i].classList.contains("occupied Black-Piece")) {
+                                            boolupright = false
+                                        }
                                     }
                                 }
                             }
                             if (rowList[row.rowIndex - i] != null) {
                                 cellList = rowList[row.rowIndex - i].cells;
-                                if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
-                                } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
-                                    if (counterPosible <= 2 && cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")) {
-                                        booldownright = false;
-                                        cellList[cell.cellIndex - i].classList.add("possible-attack")
-                                        cellList[cell.cellIndex - i].addEventListener("click", this.BottomLeft)
-                                        counterPosible++;
-                                    }
-                                    if (booldownright && !cellList[cell.cellIndex - i].classList.contains("occupied")) {
-                                        cellList[cell.cellIndex - i].classList.add("possible")
-                                        cellList[cell.cellIndex - i].addEventListener("click", this.move)
-                                    }
-
-                                    if (cellList[cell.cellIndex - i].classList.contains("occupied Black-Piece")) {
-                                        booldownright = false
+                                if(booldownright) {
+                                    if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("black")) {
+                                    } else if (cellList[cell.cellIndex - i] != null && cellList[cell.cellIndex - i].classList.contains("white")) {
+                                        if (cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")) {
+                                            let piece;
+                                            cellList = rowList[row.rowIndex - i - 1].cells;
+                                            if (cellList[cell.cellIndex - i - 1].children[0] != null && cellList[cell.cellIndex - i - 1].children[0].classList.contains("White-Piece")) {
+                                                cellList = rowList[row.rowIndex - i - 2].cells;
+                                                if (cellList[cell.cellIndex - i - 2].children[0] != null && cellList[cell.cellIndex - i - 2].children[0].classList.contains("White-Piece")) {
+                                                    booldownright = false;
+                                                    return;
+                                                } else {
+                                                    cellList = rowList[row.rowIndex - i].cells;
+                                                    piece = cellList[cell.cellIndex - i].children[0];
+                                                    piece.classList.add("target");
+                                                    cellList = rowList[row.rowIndex - i - 1].cells;
+                                                    piece = cellList[cell.cellIndex - i - 1].children[0];
+                                                    piece.classList.add("target");
+                                                    piece.classList.add("possible-attack")
+                                                    piece.addEventListener("click", this.TopLeft)
+                                                }
+                                            }
+                                        }
+                                        if (!cellList[cell.cellIndex - i].classList.contains("occupied")) {
+                                            cellList[cell.cellIndex - i].classList.add("possible")
+                                            cellList[cell.cellIndex - i].addEventListener("click", this.move)
+                                        }
+                                        if (cellList[cell.cellIndex - i].classList.contains("occupied Black-Piece")) {
+                                            booldownright = false
+                                        }
                                     }
                                 }
                                 cellList = rowList[row.rowIndex - i].cells;
-                                if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
-                                } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
-                                    if (counterPosible <= 2 && cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("White-Piece")) {
-                                        booldownleft = false;
-                                        cellList[cell.cellIndex + i].classList.add("possible-attack")
-                                        cellList[cell.cellIndex + i].addEventListener("click", this.BottomRight)
-                                        counterPosible++;
-                                    }
-                                    if (booldownleft && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
-                                        cellList[cell.cellIndex + i].classList.add("possible")
-                                        cellList[cell.cellIndex + i].addEventListener("click", this.move)
-                                    }
-
-                                    if (cellList[cell.cellIndex - i].classList.contains("occupied Black-Piece")) {
-                                        booldownleft = false
+                                if(booldownleft) {
+                                    if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("black")) {
+                                    } else if (cellList[cell.cellIndex + i] != null && cellList[cell.cellIndex + i].classList.contains("white")) {
+                                        if (cellList[cell.cellIndex + i].children[0] != null && cellList[cell.cellIndex + i].children[0].classList.contains("White-Piece")) {
+                                            let piece;
+                                            cellList = rowList[row.rowIndex - i - 1].cells;
+                                            if (cellList[cell.cellIndex + i + 1].children[0] != null && cellList[cell.cellIndex + i + 1].children[0].classList.contains("White-Piece")) {
+                                                cellList = rowList[row.rowIndex - i - 2].cells;
+                                                if (cellList[cell.cellIndex + i + 2].children[0] != null && cellList[cell.cellIndex + i + 2].children[0].classList.contains("White-Piece")) {
+                                                    booldownright = false;
+                                                    return;
+                                                } else {
+                                                    cellList = rowList[row.rowIndex - i].cells;
+                                                    piece = cellList[cell.cellIndex + i].children[0];
+                                                    piece.classList.add("target");
+                                                    cellList = rowList[row.rowIndex - i - 1].cells;
+                                                    piece = cellList[cell.cellIndex + i + 1].children[0];
+                                                    piece.classList.add("target");
+                                                    piece.classList.add("possible-attack")
+                                                    piece.addEventListener("click", this.TopLeft)
+                                                }
+                                            }
+                                        }
+                                        if (booldownleft && !cellList[cell.cellIndex + i].classList.contains("occupied")) {
+                                            cellList[cell.cellIndex + i].classList.add("possible")
+                                            cellList[cell.cellIndex + i].addEventListener("click", this.move)
+                                        }
+                                        if (cellList[cell.cellIndex - i].classList.contains("occupied Black-Piece")) {
+                                            booldownleft = false
+                                        }
                                     }
                                 }
                             }
                             this.classList.add("selected")
-                        }
                     }
                 }
             }
@@ -161,7 +231,7 @@ class dam extends stone {
         let boolupright = true;
         let counterPosible = 0;
         if (!game._possible) {
-            if (game._turn == "White") {
+            if (game.turn == "White") {
                 if (this.classList.contains("dam")) {
                     const cell = this.closest('td');
                     if (!cell) { return; }

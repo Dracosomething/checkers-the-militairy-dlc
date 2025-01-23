@@ -1,4 +1,3 @@
-var turn;
 // var cellList;
 // all normal pieces
 var BlackPieces = document.getElementsByClassName("Black-Piece")
@@ -13,11 +12,11 @@ class stone extends HTMLImageElement {
     }
 
     // some variables
-    kill_counter;
+    possible = null;
 
-    possible;
+    target = null;
 
-    target;
+    turn = null;
 
     // allows to get possible
     get _possible() {
@@ -29,14 +28,12 @@ class stone extends HTMLImageElement {
         this.possible = possible
     }
 
-    // gets the turn
-    get _turn() {
-        return turn;
-    }
 
     // runs when we assign a new value to turn, used for everything needed to happen when a turn ends
     set _turn(side) {
-        turn = side
+        console.log(side)
+        game.turn = side
+        console.log(game.turn)
         var selected = document.getElementsByClassName("selected");
         if (selected.length != 0) {
             for (let i = 0; i <= selected.length; i++) {
@@ -77,7 +74,7 @@ class stone extends HTMLImageElement {
         if (game._possible) {
             game._possible = !game.possible
         }
-        switch (game._turn) {
+        switch (game.turn) {
             case "Black":
                 for (let j = 0; j < WhitePieces.length; j++) {
                     let stone = WhitePieces[j];
@@ -163,7 +160,6 @@ class stone extends HTMLImageElement {
                 }
                 break
         }
-        game.kill_counter = 0;
     }
 
     // movement function
@@ -184,8 +180,8 @@ class stone extends HTMLImageElement {
                 possibleSquares[0].classList.remove("possible");
             }
         }
-        game._turn = game._turn == "Black" ? "White" : "Black"
-        player.children[0].innerHTML = game._turn
+        game._turn = game.turn == "Black" ? "White" : "Black"
+        player.children[0].innerHTML = game.turn
     }
 
     // attack function
@@ -209,7 +205,7 @@ class stone extends HTMLImageElement {
                 possibleSquares[0].classList.remove("possible");
             }
         }
-        switch (game._turn) {
+        switch (game.turn) {
             case "Black":
                 let white = document.createElement('img');
                 white.src = 'assets/stone_white.png';
@@ -223,13 +219,12 @@ class stone extends HTMLImageElement {
                 scoreWhite.appendChild(black)
                 break
         }
-        game.kill_counter += 1;
         // this.forceAttack(document.getElementsByClassName("selected")[0], turn == "Black" ? "White" : "Black")
         if (game._possible && this.forceAttack(document.getElementsByClassName("selected")[0], turn == "Black" ? "White" : "Black", 1)) {
             game._possible = !game.possible
         } else {
-            game._turn = turn == "Black" ? "White" : "Black"
-            player.children[0].innerHTML = game._turn
+            game.turn = turn == "Black" ? "White" : "Black"
+            player.children[0].innerHTML = game.turn
         }
     }
 
@@ -289,7 +284,7 @@ class stone extends HTMLImageElement {
             }
         }
         let piece = this
-        let opposing = game._turn;
+        let opposing = game.turn;
         const cell = piece.closest('td');
         if (!cell) { return; }
         const row = cell.parentElement;
@@ -476,7 +471,7 @@ class stone extends HTMLImageElement {
     // movement for black
     setUpBlack(event) {
         if (!game._possible) {
-            if (game._turn == "Black") {
+            if (game.turn == "Black") {
                 const cell = this.closest('td');
                 if (!cell) { return; }
                 const row = cell.parentElement;
@@ -546,7 +541,7 @@ class stone extends HTMLImageElement {
     // movement for white
     setUpWhite(event) {
         if (!game._possible) {
-            if (game._turn == "White") {
+            if (game.turn == "White") {
                 const cell = this.closest('td');
                 if (!cell) { return; }
                 const row = cell.parentElement;

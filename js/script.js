@@ -21,7 +21,7 @@ var cellList;
 var target;
 
 // create classes
-const game = new stone()
+const game = new dam()
 
 generateButton.addEventListener("click", generateField)
 
@@ -41,10 +41,10 @@ function generateField() {
         whitePiece.classList.add("occupied")
     }
     for (let i = 0; i < blackPieces.length; i++) {
-        piece = new stone();
-        console.log(piece instanceof stone)
+        piece = new dam();
+        console.log(piece instanceof dam)
         piece.src = 'assets/stone_black.png';
-        piece.className = "Black-Piece"
+        piece.className = "dam Black-Piece"
         let blackPiece = blackPieces[i];
         piece.addEventListener("click", piece.setUpBlack)
         blackPiece.appendChild(piece)
