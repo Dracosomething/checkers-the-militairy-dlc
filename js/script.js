@@ -41,10 +41,10 @@ function generateField() {
         whitePiece.classList.add("occupied")
     }
     for (let i = 0; i < blackPieces.length; i++) {
-        piece = new dam();
-        console.log(piece instanceof dam)
+        piece = new stone();
+        console.log(piece instanceof stone)
         piece.src = 'assets/stone_black.png';
-        piece.className = "dam Black-Piece"
+        piece.className = "Black-Piece"
         let blackPiece = blackPieces[i];
         piece.addEventListener("click", piece.setUpBlack)
         blackPiece.appendChild(piece)
@@ -55,7 +55,7 @@ function generateField() {
     // set it so pieces can move
     piece._possible = false;
     // show the turn in the website
-    player.children[0].innerHTML = game._turn
+    player.children[0].innerHTML = game.turn
     // disable the button
     generateButton.setAttribute('disabled', 'false');
 }

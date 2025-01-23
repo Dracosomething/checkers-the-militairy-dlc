@@ -71,9 +71,12 @@ class stone extends HTMLImageElement {
                 targets[0].classList.remove("target");
             }
         }
+        console.log(game._possible);
         if (game._possible) {
-            game._possible = !game.possible
+            console.log(game._possible);
+            game._possible = !game._possible
         }
+        console.log(game._possible);
         switch (game.turn) {
             case "Black":
                 for (let j = 0; j < WhitePieces.length; j++) {
@@ -86,6 +89,7 @@ class stone extends HTMLImageElement {
                         new_dam.addEventListener("click", new_dam.setUpWhite)
                         stone.parentElement.appendChild(new_dam)
                         stone.remove();
+                        console.log(new_dam);
                     }
                 }
                 for (let j = 0; j < BlackPieces.length; j++) {
@@ -128,6 +132,7 @@ class stone extends HTMLImageElement {
                         new_dam.addEventListener("click", new_dam.setUpBlack)
                         stone.parentElement.appendChild(new_dam)
                         stone.remove();
+                        console.log(new_dam)
                     }
                 }
                 for (let j = 0; j < WhitePieces.length; j++) {
@@ -220,10 +225,10 @@ class stone extends HTMLImageElement {
                 break
         }
         // this.forceAttack(document.getElementsByClassName("selected")[0], turn == "Black" ? "White" : "Black")
-        if (game._possible && this.forceAttack(document.getElementsByClassName("selected")[0], turn == "Black" ? "White" : "Black", 1)) {
-            game._possible = !game.possible
+        if (game._possible && this.forceAttack(document.getElementsByClassName("selected")[0], game.turn == "Black" ? "White" : "Black", 1)) {
+            game._possible = !game._possible
         } else {
-            game.turn = turn == "Black" ? "White" : "Black"
+            game._turn = game.turn == "Black" ? "White" : "Black"
             player.children[0].innerHTML = game.turn
         }
     }
