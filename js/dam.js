@@ -6,15 +6,10 @@ class dam extends stone {
     killCounter = 0;
 
     set _turn(side) {
-        console.log(side)
         super._turn = side;
-        console.log(game)
-        console.log(game.turn)
         for (let i = 0; i < BlackDam.length; i++) {
-            console.log(BlackDam[i])
         }
         for (let i = 0; i < WhiteDam.length; i++) {
-            console.log(WhiteDam[i])
         }
     }
 
@@ -109,14 +104,17 @@ class dam extends stone {
                                                     piece.classList.add("target");
                                                     piece.parentElement.classList.add("possible-attack")
                                                     piece.addEventListener("click", this.TopLeft)
+                                                    boolupleft = false;
+                                                    return;
                                                 } else {
                                                     boolupleft = false;
                                                     return;
                                                 }
-                                            } else {
+                                            } else if(cellList[cell.cellIndex - i - 1] != null) {
                                                 cellList = rowList[row.rowIndex + i].cells;
                                                 piece = cellList[cell.cellIndex - i].children[0];
                                                 piece.classList.add("target");
+                                                piece.parentElement.classList.add("possible-attack")
                                                 piece.addEventListener("click", this.TopLeft)
                                             }
                                         }
@@ -152,14 +150,17 @@ class dam extends stone {
                                                     piece.classList.add("target");
                                                     piece.classList.add("possible-attack")
                                                     piece.addEventListener("click", this.TopRight)
+                                                    boolupright = false;
+                                                    return;
                                                 } else {
                                                     boolupright = false;
                                                     return;
                                                 }
-                                            } else {
+                                            } else if(cellList[cell.cellIndex + i + 1] != null) {
                                                 cellList = rowList[row.rowIndex + i].cells;
                                                 piece = cellList[cell.cellIndex + i].children[0];
                                                 piece.classList.add("target");
+                                                piece.parentElement.classList.add("possible-attack")
                                                 piece.addEventListener("click", this.TopRight)
                                             }
                                         }
@@ -183,8 +184,10 @@ class dam extends stone {
                                         if (cellList[cell.cellIndex - i].children[0] != null && cellList[cell.cellIndex - i].children[0].classList.contains("White-Piece")) {
                                             let piece;
                                             cellList = rowList[row.rowIndex - i - 1].cells;
+                                            console.log(cellList[cell.cellIndex - i - 1])
                                             if (cellList[cell.cellIndex - i - 1] != null && cellList[cell.cellIndex - i - 1].children[0] != null && cellList[cell.cellIndex - i - 1].children[0].classList.contains("White-Piece")) {
                                                 cellList = rowList[row.rowIndex - i - 2].cells;
+                                                console.log(cellList[cell.cellIndex + i + 2]);
                                                 if (cellList[cell.cellIndex - i - 2] != null && cellList[cell.cellIndex - i - 2].children[0] != null && cellList[cell.cellIndex - i - 2].children[0].classList.contains("White-Piece")) {
                                                     booldownright = false;
                                                     return;
@@ -196,16 +199,19 @@ class dam extends stone {
                                                     piece = cellList[cell.cellIndex - i - 1].children[0];
                                                     piece.classList.add("target");
                                                     piece.classList.add("possible-attack")
-                                                    piece.addEventListener("click", this.BottomRight)
+                                                    piece.addEventListener("click", this.BottomLeft);
+                                                    booldownright = false;
+                                                    return;
                                                 } else {
                                                     booldownright = false;
                                                     return;
                                                 }
-                                            } else {
+                                            } else if(cellList[cell.cellIndex - i - 1] != null) {
                                                 cellList = rowList[row.rowIndex - i].cells;
                                                 piece = cellList[cell.cellIndex - i].children[0];
                                                 piece.classList.add("target");
-                                                piece.addEventListener("click", this.BottomRight)
+                                                piece.parentElement.classList.add("possible-attack")
+                                                piece.addEventListener("click", this.BottomLeft)
                                             }
                                         }
                                         cellList = rowList[row.rowIndex - i].cells;
@@ -227,8 +233,10 @@ class dam extends stone {
                                             let piece;
                                             cellList = rowList[row.rowIndex - i - 1].cells;
                                             if (cellList[cell.cellIndex + i + 1] != null && cellList[cell.cellIndex + i + 1].children[0] != null && cellList[cell.cellIndex + i + 1].children[0].classList.contains("White-Piece")) {
+                                                console.log(cellList[cell.cellIndex + i + 1]);
                                                 cellList = rowList[row.rowIndex - i - 2].cells;
                                                 if (cellList[cell.cellIndex + i + 2] != null && cellList[cell.cellIndex + i + 2].children[0] != null && cellList[cell.cellIndex + i + 2].children[0].classList.contains("White-Piece")) {
+                                                    console.log(cellList[cell.cellIndex + i + 2]);
                                                     booldownleft = false;
                                                     return;
                                                 } else if(cellList[cell.cellIndex + i + 2] != null) {
@@ -239,16 +247,19 @@ class dam extends stone {
                                                     piece = cellList[cell.cellIndex + i + 1].children[0];
                                                     piece.classList.add("target");
                                                     piece.classList.add("possible-attack")
-                                                    piece.addEventListener("click", this.BottomLeft);
+                                                    piece.addEventListener("click", this.BottomRight);
+                                                    booldownleft = false;
+                                                    return;
                                                 } else {
                                                     booldownleft = false;
                                                     return;
                                                 }
-                                            } else {
+                                            } else if(cellList[cell.cellIndex + i + 1] != null) {
                                                 cellList = rowList[row.rowIndex - i].cells;
                                                 piece = cellList[cell.cellIndex + i].children[0];
                                                 piece.classList.add("target");
-                                                piece.addEventListener("click", this.BottomLeft);
+                                                piece.parentElement.classList.add("possible-attack")
+                                                piece.addEventListener("click", this.BottomRight);
                                             }
                                         }
                                         cellList = rowList[row.rowIndex - i].cells;
