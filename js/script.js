@@ -44,7 +44,7 @@ function generateField() {
         piece = new stone();
         console.log(piece instanceof stone)
         piece.src = 'assets/stone_black.png';
-        piece.className = "dam Black-Piece"
+        piece.className = "Black-Piece"
         let blackPiece = blackPieces[i];
         piece.addEventListener("click", piece.setUpBlack)
         blackPiece.appendChild(piece)
