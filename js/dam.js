@@ -530,5 +530,3 @@ class dam extends stone {
 }
 
 customElements.define("dam-dam", dam , { extends: 'img' })
-
-// export { dam }
