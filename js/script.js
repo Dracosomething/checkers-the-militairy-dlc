@@ -20,6 +20,8 @@
  */
 var whitePieces = document.getElementsByClassName("startposWhite")
 var blackPieces = document.getElementsByClassName("startposBlack")
+var whiteBoot = document.getElementsByClassName("startposWhite-boot")
+var blackBoot = document.getElementsByClassName("startposBlack-boot")
 var BlackSquares = document.getElementsByClassName("black")
 var WhiteSquares = document.getElementsByClassName("white")
 
@@ -83,6 +85,40 @@ function generateField() {
         // set the start position to occupied
         blackPiece.classList.add("occupied")
     }
+    // for (let i = 0; i < whiteBoot.length; i++) {
+    //     // create the piece
+    //     piece = new boot();
+    //     console.log(piece instanceof boot)
+    //     // set the image
+    //     piece.src = 'assets/stone_white.png';
+    //     // set the class
+    //     piece.className = "White-Piece"
+    //     // get the start position
+    //     let whitePiece = whiteBoot[i];
+    //     // add's movement to the piece
+    //     piece.addEventListener("click", piece.setUpWhite)
+    //     // add the piece to the start position
+    //     whitePiece.appendChild(piece)
+    //     // set the start position to occupied
+    //     whitePiece.classList.add("occupied")
+    // }
+    // for (let i = 0; i < blackBoot.length; i++) {
+    //     // create the piece
+    //     piece = new boot();
+    //     console.log(piece instanceof boot)
+    //     // set the image
+    //     piece.src = 'assets/stone_black.png';
+    //     // set the class
+    //     piece.className = "Black-Piece"
+    //     // get the start position
+    //     let blackPiece = blackBoot[i];
+    //     // add's movement to the piece
+    //     piece.addEventListener("click", piece.setUpBlack)
+    //     // add the piece to the start position
+    //     blackPiece.appendChild(piece)
+    //     // set the start position to occupied
+    //     blackPiece.classList.add("occupied")
+    // }
     // randomly assign a first turn
     game._turn = Math.floor(Math.random() * 10) + 1 >= 5 ? "White" : "Black"
     // set it so pieces can move
