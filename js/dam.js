@@ -1,10 +1,33 @@
+/**
+ * @file dam.js
+ * @fileoverview This script defines the dam class, which extends the stone class and represents a dam piece in the game.
+ */
+
+/**
+ * @class dam
+ * @extends stone
+ * @classdesc Class representing a dam piece in the game.
+ */
 class dam extends stone {
+    /**
+     * @constructor
+     * Emty constructor.
+     */
     constructor() {
         super()
     }
 
+    /**
+     * Counter for the number of kills made by this dam piece.
+     * @type {number}
+     */
     killCounter = 0;
-
+    
+    /**
+     * Set the turn for the dam piece.
+     * @param {string} side - The side to set the turn for.
+     * @returns {void}
+     */
     set _turn(side) {
         super._turn = side;
         for (let i = 0; i < BlackDam.length; i++) {
@@ -24,6 +47,12 @@ class dam extends stone {
     //     return bool;
     // }
 
+    /**
+     * Attack a target piece and move to a new square.
+     * @param {stone} target - The target piece to attack.
+     * @param {HTMLTableCellElement} newSquare - The new square to move to after the attack.
+     * @returns {void}
+     */
     attack(target, newSquare) {
         super.attack(target, newSquare);
         for(let i = 0; i < document.getElementsByClassName("target").length; i++) {
@@ -33,7 +62,25 @@ class dam extends stone {
         this.killCounter++
     }
 
-    // allows for event listeners to be used properly
+    /** 
+     * Movement function for dam pieces.
+     * @function
+     * @param {Event} event
+     * @returns {void}
+    */
+    move(event) {
+        super.move(event);
+        for(let i = 0; i < document.getElementsByClassName("target").length; i++) {
+            console.log(document.getElementsByClassName("target")[i]);
+            document.getElementsByClassName("target")[0].remove()
+        }
+    }
+
+    /**
+     * Handle the top-left movement event.
+     * @param {Event} event - The event triggered by the movement.
+     * @returns {void}
+     */
     TopLeft(event) {
         const cell = this.closest("td")
         if (!cell) { return; }
@@ -42,6 +89,11 @@ class dam extends stone {
         this.attack(this, newSquare)
     }
 
+    /**
+     * Handle the top-right movement event.
+     * @param {Event} event - The event triggered by the movement.
+     * @returns {void}
+     */
     TopRight(event) {
         const cell = this.closest("td")
         if (!cell) { return; }
@@ -50,6 +102,11 @@ class dam extends stone {
         this.attack(this, newSquare)
     }
 
+    /**
+     * Handle the bottom-right movement event.
+     * @param {Event} event - The event triggered by the movement.
+     * @returns {void}
+     */
     BottomRight(event) {
         const cell = this.closest("td")
         if (!cell) { return; }
@@ -58,6 +115,11 @@ class dam extends stone {
         this.attack(this, newSquare)
     }
 
+    /**
+     * Handle the bottom-left movement event.
+     * @param {Event} event - The event triggered by the movement.
+     * @returns {void}
+     */
     BottomLeft(event) {
         const cell = this.closest("td")
         if (!cell) { return; }
@@ -66,8 +128,13 @@ class dam extends stone {
         this.attack(this, newSquare)
     }
 
-    // black dam movement code
+    /**
+     * Set up the movement options for a black dam piece.
+     * @param {Event} event - The event triggered by the setup.
+     * @returns {void}
+     */
     setUpBlack(event) {
+        // some booleans for attack checks
         let booldownleft = true;
         let booldownright = true;
         let boolupleft = true;
@@ -315,7 +382,11 @@ class dam extends stone {
         }
     }
 
-    // white dam movement code
+    /**
+     * Set up the movement options for a white dam piece.
+     * @param {Event} event - The event triggered by the setup.
+     * @returns {void}
+     */
     setUpWhite(event) {
         let booldownleft = true;
         let booldownright = true;

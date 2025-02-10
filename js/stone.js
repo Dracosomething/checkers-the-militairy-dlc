@@ -1,35 +1,79 @@
-// var cellList;
-// all normal pieces
+/**
+ * @file stone.js
+ * @description This file contains the class stone which is used to create a new normal piece
+ */
+
+/**
+ * all normal pieces
+ * @constant {HTMLCollection} BlackPieces - Collection of elements representing the black pieces on the game board.
+ * @constant {HTMLCollection} WhitePieces - Collection of elements representing the white pieces on the game board.
+ * all dam pieces
+ * @constant {HTMLCollection} BlackDam - Collection of elements representing the black dam pieces on the game board.
+ * @constant {HTMLCollection} WhiteDam - Collection of elements representing the white dam pieces on the game board.
+ */
 var BlackPieces = document.getElementsByClassName("Black-Piece")
 var WhitePieces = document.getElementsByClassName("White-Piece")
-// all dam pieces
+
 var BlackDam = document.getElementsByClassName("dam Black-Piece");
 var WhiteDam = document.getElementsByClassName("dam White-Piece");
 
+/**
+ * Creates a new piece
+ * @class
+ * @extends HTMLImageElement
+ * @classdesc Used to make a new normal piece
+ */
 class stone extends HTMLImageElement {
+    /**
+     * @constructor
+     * Empty constructor
+     */
     constructor() {
         super()
     }
 
-    // some variables
+    // some variables used inside the elements
+    /**
+     * @type {boolean}
+     */
     possible = null;
 
+    /**
+     * @type {stone}
+     */
     target = null;
 
+    /**
+     * @type {string}
+     */
     turn = null;
 
-    // allows to get possible
+    /**
+     * Returns possible
+     * @function
+     * @returns {boolean}
+     */
     get _possible() {
         return this.possible;
     }
 
-    // allows to set possible
+    /**
+     * Sets possible
+     * @function
+     * @param {boolean} possible
+     * @returns {void}
+     */
     set _possible(possible) {
         this.possible = possible
     }
 
 
-    // runs when we assign a new value to turn, used for everything needed to happen when a turn ends
+    /**
+     * Used for updates in the game
+     * @function
+     * @param {string} side
+     * @returns {void}
+     */
     set _turn(side) {
         console.log(side)
         game.turn = side
@@ -167,7 +211,12 @@ class stone extends HTMLImageElement {
         }
     }
 
-    // movement function
+    /**
+     * Movement function
+     * @function
+     * @param {Event} event
+     * @returns {void}
+     */
     move(event) {
         if (document.getElementsByClassName("selected")[0].parentElement != null) {
             document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
@@ -189,7 +238,13 @@ class stone extends HTMLImageElement {
         player.children[0].innerHTML = game.turn
     }
 
-    // attack function
+    /**
+     * Attack function
+     * @function
+     * @param {HTMLElement} target
+     * @param {HTMLElement} newSquare
+     * @returns {void}
+     */
     attack(target, newSquare) {
         document.getElementsByClassName("selected")[0].parentElement.classList.remove("occupied")
         newSquare.appendChild(document.getElementsByClassName("selected")[0])
@@ -233,7 +288,12 @@ class stone extends HTMLImageElement {
         }
     }
 
-    // allows for event listeners to be used properly
+    /**
+     * Allows for event listeners to be used properly
+     * @function
+     * @param {Event} event
+     * @returns {void}
+     */
     TopLeft(event) {
         const cell = this.closest("td")
         if (!cell) { return; }
@@ -242,6 +302,12 @@ class stone extends HTMLImageElement {
         this.attack(this, newSquare)
     }
 
+    /**
+     * Allows for event listeners to be used properly
+     * @function
+     * @param {Event} event
+     * @returns {void}
+     */
     TopRight(event) {
         const cell = this.closest("td")
         if (!cell) { return; }
@@ -250,6 +316,12 @@ class stone extends HTMLImageElement {
         this.attack(this, newSquare)
     }
 
+    /**
+     * Allows for event listeners to be used properly
+     * @function
+     * @param {Event} event
+     * @returns {void}
+     */
     BottomRight(event) {
         const cell = this.closest("td")
         if (!cell) { return; }
@@ -258,6 +330,12 @@ class stone extends HTMLImageElement {
         this.attack(this, newSquare)
     }
 
+    /**
+     * Allows for event listeners to be used properly
+     * @function
+     * @param {Event} event
+     * @returns {void}
+     */
     BottomLeft(event) {
         const cell = this.closest("td")
         if (!cell) { return; }
@@ -266,7 +344,12 @@ class stone extends HTMLImageElement {
         this.attack(this, newSquare)
     }
 
-    // optional attacking
+    /**
+     * Optional attacking
+     * @function
+     * @param {Event} event
+     * @returns {void}
+     */    
     attackCheck(event) {
         var possibleSquares = document.getElementsByClassName("possible");
         let x = possibleSquares.length;
@@ -352,7 +435,14 @@ class stone extends HTMLImageElement {
         }
     }
 
-    // checks for attack possibilities
+    /**
+     * Checks for attack possibilities
+     * @function
+     * @param {stone} stone
+     * @param {string} opposing
+     * @param {number} i
+     * @returns {boolean}
+     */
     forceAttack(stone, opposing, i) {
         const cell = stone.closest('td');
         if (!cell) { return; }
@@ -473,7 +563,12 @@ class stone extends HTMLImageElement {
         return bool;
     }
 
-    // movement for black
+    /**
+     * Movement for black
+     * @function
+     * @param {Event} event
+     * @returns {void}
+     */
     setUpBlack(event) {
         if (!game._possible) {
             if (game.turn == "Black") {
@@ -543,7 +638,12 @@ class stone extends HTMLImageElement {
         }
     }
 
-    // movement for white
+    /**
+     * Movement for white
+     * @function
+     * @param {Event} event
+     * @returns {void}
+     */
     setUpWhite(event) {
         if (!game._possible) {
             if (game.turn == "White") {

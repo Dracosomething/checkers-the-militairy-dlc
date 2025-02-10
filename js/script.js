@@ -1,35 +1,49 @@
-// start positions
+/**
+ * @file script.js
+ * @fileoverview This script handles the initialization and gameplay mechanics for a web-based game.
+ * It includes functions to generate the game field, manage player turns, and handle win conditions.
+ * 
+ * @module WebGameScript
+ */
+
+/**
+ * @constant {HTMLCollection} whitePieces - Collection of elements representing the starting positions for white pieces.
+ * @constant {HTMLCollection} blackPieces - Collection of elements representing the starting positions for black pieces.
+ * @constant {HTMLCollection} BlackSquares - Collection of elements representing the black squares on the game board.
+ * @constant {HTMLCollection} WhiteSquares - Collection of elements representing the white squares on the game board.
+ * @constant {HTMLElement} player - Element displaying the current player's turn.
+ * @constant {HTMLElement} generateButton - Button element to generate the game field.
+ * @constant {HTMLElement} scoreWhite - Element displaying the score for the white player.
+ * @constant {HTMLElement} scoreBlack - Element displaying the score for the black player.
+ * @constant {NodeList} rowList - NodeList of all rows in the game table.
+ * @constant {dam} game - Handles the game logic and state.
+ */
 var whitePieces = document.getElementsByClassName("startposWhite")
 var blackPieces = document.getElementsByClassName("startposBlack")
-// squares
 var BlackSquares = document.getElementsByClassName("black")
 var WhiteSquares = document.getElementsByClassName("white")
 
-// show turn and button
 let player = document.getElementById("turn-show")
 let generateButton = document.getElementById("generateButton")
 
-// score board for white and black
 let scoreWhite = document.getElementById("score-white")
 let scoreBlack = document.getElementById("score-black")
 
-// all rows in the table
 const rowList = document.querySelectorAll("table tr")
 
-// empty variables;
 var cellList;
 var target;
 
-// create classes
 const game = new dam()
 
-// fills the board with pieces
+// adds the event listener for filling the board to the button
 generateButton.addEventListener("click", generateField)
 
 /**
- * @returns {void}
+ * Generates the game field by placing pieces on their starting positions and setting up initial game state.
  * 
- * fill the board with pieces
+ * @function generateField
+ * @returns {void}
  */
 function generateField() {
     // empty variable so no errors
@@ -80,10 +94,11 @@ function generateField() {
 }
 
 /**
- * @param {string} color
- * @returns {void}
+ * Alerts the winner of the game and updates the score. Resets the game board for a new round.
  * 
- * function to alert the winner
+ * @function alertWin
+ * @param {string} color - The color of the winning player ("White" or "Black").
+ * @returns {void}
  */
 function alertWin(color) {
     // empty variable for the score
